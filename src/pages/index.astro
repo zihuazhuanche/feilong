@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('posts', ({ data }) => !data.draft);
+
+allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+// 按年份分组
+const postsByYear: Record<number, typeof allPosts> = {};
+for (const post of allPosts) {
+  const year = post.data.date.getFullYear();
+  if (!postsByYear[year]) postsByYear[year] = [];
+  postsByYear[year].push(post);
+}
+
+const years = Object.keys(postsByYear)
+  .map(Number)
+  .sort((a, b) => b - a);
+
+function formatDate(date: Date) {
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${m}-${d}`;
+}
+---
+
+<Layout title="飞龙">
+  <style>
+    .year-group {
+      margin-bottom: 2.5rem;
+    }
+    .year-label {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      margin-bottom: 0.75rem;
+    }
+    .post-list {
+      list-style: none;
+    }
+    .post-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.3rem 0;
+    }
+    .post-title {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .post-title:hover {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 1;
+    }
+    .post-date {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+
+  {years.map((year) => (
+    <div class="year-group">
+      <div class="year-label">{year}</div>
+      <ul class="post-list">
+        {postsByYear[year].map((post) => (
+          <li class="post-item">
+            <a class="post-title" href={`/posts/${post.slug}`}>{post.data.title}</a>
+            <span class="post-date">{formatDate(post.data.date)}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+
+  {allPosts.length === 0 && (
+    <p style="color: var(--color-muted); font-size: 0.95rem;">还没有文章，快来写第一篇吧。</p>
+  )}
+</Layout>

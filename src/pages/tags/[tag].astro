@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  const tagSet = new Set<string>();
+  for (const post of posts) {
+    for (const tag of post.data.tags ?? []) tagSet.add(tag);
+  }
+  return [...tagSet].map((tag) => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter((p) => p.data.tags?.includes(tag))
+        .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString('zh-CN', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+}
+---
+
+<Layout title={`#${tag} - 飞龙`}>
+  <style>
+    h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    .post-list { list-style: none; }
+    .post-item {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.3rem 0;
+    }
+    .post-title {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .post-title:hover { text-decoration: underline; text-underline-offset: 3px; opacity: 1; }
+    .post-date {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      white-space: nowrap;
+    }
+    .back {
+      display: inline-block;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      text-decoration: none;
+    }
+    .back:hover { color: var(--color-text); }
+  </style>
+
+  <h2>#{tag}</h2>
+  <ul class="post-list">
+    {posts.map((post) => (
+      <li class="post-item">
+        <a class="post-title" href={`/posts/${post.slug}`}>{post.data.title}</a>
+        <span class="post-date">{formatDate(post.data.date)}</span>
+      </li>
+    ))}
+  </ul>
+
+  <a class="back" href="/tags">← 所有标签</a>
+</Layout>
