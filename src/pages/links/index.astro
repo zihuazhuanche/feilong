@@ -26,10 +26,29 @@ function getDomain(url: string): string {
   }
 }
 
+async function fetchOgImage(url: string): Promise<string | null> {
+  try {
+    const res = await fetch(url, {
+      signal: AbortSignal.timeout(4000),
+      headers: { 'User-Agent': 'Mozilla/5.0 (compatible; feilong-bot/1.0)' },
+    });
+    const html = await res.text();
+    const m =
+      html.match(/<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i) ||
+      html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i);
+    const src = m ? m[1] : null;
+    if (!src) return null;
+    return src.startsWith('http') ? src : new URL(src, url).href;
+  } catch {
+    return null;
+  }
+}
+
 const renderedLinks = await Promise.all(
   allLinks.map(async (link) => {
     const { Content } = await link.render();
-    return { ...link, Content };
+    const image = link.data.image ?? (await fetchOgImage(link.data.url));
+    return { ...link, Content, image };
   })
 );
 ---
@@ -43,29 +62,38 @@ const renderedLinks = await Promise.all(
       {renderedLinks.map((link, i) => {
         const LinkContent = link.Content;
         return (
-        <article class="link-item" id={`link-${i}`}>
-          <div class="link-meta">
-            <span class={`tag tag-${link.data.type}`}>
-              {link.data.type === 'article' ? '文章' : '链接'}
-            </span>
-            <span class="link-time">{relativeTime(link.data.date)}</span>
+        <article class="link-item">
+          <!-- 卡片头部：标题 + 缩略图 -->
+          <div class="link-card-header">
+            <div class="link-card-left">
+              <h2 class="link-title">
+                <a href={link.data.url} target="_blank" rel="noopener noreferrer">
+                  {link.data.title}
+                </a>
+              </h2>
+              <span class="domain-text">{getDomain(link.data.url)}</span>
+            </div>
+            {link.image && (
+              <a href={link.data.url} target="_blank" rel="noopener noreferrer" class="link-thumb">
+                <img src={link.image} alt="" loading="lazy" />
+              </a>
+            )}
           </div>
 
-          <h2 class="link-title">
-            <a href={link.data.url} target="_blank" rel="noopener noreferrer">
-              {link.data.title}
-            </a>
-          </h2>
-
-          <div class="link-domain">
-            <span class="domain-text">{getDomain(link.data.url)}</span>
-          </div>
-
+          <!-- 摘要正文 -->
           <div class="link-body">
             <div class="link-content collapsed" data-id={i}>
               <LinkContent />
             </div>
-            <button class="expand-btn" data-id={i}>查看更多 ↓</button>
+            <button class="expand-btn" data-id={i}>查看更多</button>
+          </div>
+
+          <!-- 底部：标签 + 时间 -->
+          <div class="link-footer">
+            <span class={`tag tag-${link.data.type}`}>
+              #{link.data.type === 'article' ? 'Article' : 'Link'}
+            </span>
+            <span class="link-time">{relativeTime(link.data.date)}</span>
           </div>
         </article>
         );
@@ -88,69 +116,53 @@ const renderedLinks = await Promise.all(
   .page-desc {
     color: var(--color-muted);
     font-size: 0.9rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 2rem;
   }
 
   .link-list {
     display: flex;
     flex-direction: column;
+    gap: 1rem;
   }
 
+  /* 卡片 */
   .link-item {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid var(--color-border);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1.1rem 1.2rem 0.9rem;
+    background: var(--color-bg);
+    transition: box-shadow 0.15s;
   }
 
-  .link-item:last-child {
-    border-bottom: none;
-  }
-
-  .link-meta {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .tag {
-    font-size: 0.75rem;
-    padding: 0.15em 0.6em;
-    border-radius: 999px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-  }
-
-  .tag-article {
-    background: #e8f0fe;
-    color: #1a56db;
-  }
-
-  .tag-link {
-    background: #f0fdf4;
-    color: #16a34a;
+  .link-item:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
   }
 
   @media (prefers-color-scheme: dark) {
-    .tag-article {
-      background: #1e3a5f;
-      color: #93b4fd;
-    }
-    .tag-link {
-      background: #14291a;
-      color: #6ee79a;
+    .link-item:hover {
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
     }
   }
 
-  .link-time {
-    font-size: 0.8rem;
-    color: var(--color-muted);
+  /* 头部：标题区 + 缩略图 */
+  .link-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .link-card-left {
+    flex: 1;
+    min-width: 0;
   }
 
   .link-title {
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
-    margin-bottom: 0.25rem;
     line-height: 1.4;
+    margin-bottom: 0.2rem;
   }
 
   .link-title a {
@@ -159,13 +171,9 @@ const renderedLinks = await Promise.all(
   }
 
   .link-title a:hover {
-    opacity: 0.7;
     text-decoration: underline;
     text-underline-offset: 3px;
-  }
-
-  .link-domain {
-    margin-bottom: 0.75rem;
+    opacity: 0.75;
   }
 
   .domain-text {
@@ -173,21 +181,38 @@ const renderedLinks = await Promise.all(
     color: var(--color-muted);
   }
 
+  /* 缩略图 */
+  .link-thumb {
+    flex-shrink: 0;
+    width: 72px;
+    height: 54px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: block;
+  }
+
+  .link-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* 摘要正文 */
   .link-body {
-    position: relative;
+    margin-bottom: 0.75rem;
   }
 
   .link-content {
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     line-height: 1.7;
     color: var(--color-text);
     overflow: hidden;
   }
 
   .link-content.collapsed {
-    max-height: 4.8em; /* ~3 lines */
-    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    max-height: 4.9em;
+    -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
   }
 
   .link-content.expanded {
@@ -197,7 +222,7 @@ const renderedLinks = await Promise.all(
   }
 
   .link-content :global(p) {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.6rem;
   }
 
   .link-content :global(p:last-child) {
@@ -207,12 +232,12 @@ const renderedLinks = await Promise.all(
   .expand-btn {
     background: none;
     border: none;
-    padding: 0.35rem 0;
-    font-size: 0.82rem;
+    padding: 0.25rem 0;
+    font-size: 0.8rem;
     color: var(--color-muted);
     cursor: pointer;
-    margin-top: 0.35rem;
     display: block;
+    margin-top: 0.3rem;
   }
 
   .expand-btn:hover {
@@ -221,6 +246,27 @@ const renderedLinks = await Promise.all(
 
   .expand-btn.hidden {
     display: none;
+  }
+
+  /* 底部 */
+  .link-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    font-weight: 500;
+  }
+
+  .link-time {
+    font-size: 0.75rem;
+    color: var(--color-muted);
   }
 </style>
 

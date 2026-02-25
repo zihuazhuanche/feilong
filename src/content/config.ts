@@ -18,6 +18,8 @@ const links = defineCollection({
     url: z.string().url(),
     date: z.coerce.date(),
     type: z.enum(['article', 'link']).default('link'),
+    image: z.string().optional(),
+    description: z.string().optional(),
   }),
 });
 
