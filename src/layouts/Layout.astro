@@ -53,9 +53,12 @@ const { title, description = 'feilong.eu.org' } = Astro.props;
         background: var(--color-bg);
         color: var(--color-text);
         line-height: 1.7;
-        padding: 0 1rem;
+      }
+
+      .wrap {
         max-width: var(--max-width);
         margin: 0 auto;
+        padding: 0 1.5rem;
       }
 
       header {
@@ -140,19 +143,21 @@ const { title, description = 'feilong.eu.org' } = Astro.props;
     </style>
   </head>
   <body>
-    <header>
-      <a class="site-title" href="/">飞龙</a>
-      <nav>
-        <a href="/">文章</a>
-        <a href="/tags">标签</a>
-        <a href="/about">关于</a>
-      </nav>
-    </header>
-    <main>
-      <slot />
-    </main>
-    <footer>
-      &copy; {new Date().getFullYear()} feilong.eu.org
-    </footer>
+    <div class="wrap">
+      <header>
+        <a class="site-title" href="/">飞龙</a>
+        <nav>
+          <a href="/">文章</a>
+          <a href="/tags">标签</a>
+          <a href="/about">关于</a>
+        </nav>
+      </header>
+      <main>
+        <slot />
+      </main>
+      <footer>
+        &copy; {new Date().getFullYear()} feilong.eu.org
+      </footer>
+    </div>
   </body>
 </html>
