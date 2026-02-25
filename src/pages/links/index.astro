@@ -127,30 +127,24 @@ const renderedLinks = await Promise.all(
 
   /* 卡片 */
   .link-item {
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-    padding: 1.1rem 1.2rem 0.9rem;
-    background: var(--color-bg);
-    transition: box-shadow 0.15s;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
   }
 
-  .link-item:hover {
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  .link-item:last-child {
+    border-bottom: none;
   }
 
-  @media (prefers-color-scheme: dark) {
-    .link-item:hover {
-      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-    }
-  }
-
-  /* 头部：标题区 + 缩略图 */
+  /* 头部预览框：标题 + 缩略图，只有这块有 border */
   .link-card-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 0.75rem;
-    margin-bottom: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+    margin-bottom: 0.85rem;
   }
 
   .link-card-left {
@@ -254,8 +248,7 @@ const renderedLinks = await Promise.all(
     align-items: center;
     justify-content: flex-end;
     gap: 0.75rem;
-    padding-top: 0.6rem;
-    border-top: 1px solid var(--color-border);
+    margin-top: 0.6rem;
   }
 
   .tag {
