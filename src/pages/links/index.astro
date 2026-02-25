@@ -1,0 +1,247 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+const allLinks = (await getCollection('links')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+function relativeTime(date: Date): string {
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  const mins = Math.floor(diff / 60000);
+  const hours = Math.floor(diff / 3600000);
+  const days = Math.floor(diff / 86400000);
+  if (mins < 60) return `${mins} 分钟前`;
+  if (hours < 24) return `${hours} 小时前`;
+  if (days < 30) return `${days} 天前`;
+  return date.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+
+function getDomain(url: string): string {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
+
+const renderedLinks = await Promise.all(
+  allLinks.map(async (link) => {
+    const { Content } = await link.render();
+    return { ...link, Content };
+  })
+);
+---
+
+<Layout title="链接 · 飞龙" description="收藏的文章与链接">
+  <div class="links-page">
+    <h1 class="page-title">链接</h1>
+    <p class="page-desc">值得一读的文章和链接。</p>
+
+    <div class="link-list">
+      {renderedLinks.map((link, i) => {
+        const LinkContent = link.Content;
+        return (
+        <article class="link-item" id={`link-${i}`}>
+          <div class="link-meta">
+            <span class={`tag tag-${link.data.type}`}>
+              {link.data.type === 'article' ? '文章' : '链接'}
+            </span>
+            <span class="link-time">{relativeTime(link.data.date)}</span>
+          </div>
+
+          <h2 class="link-title">
+            <a href={link.data.url} target="_blank" rel="noopener noreferrer">
+              {link.data.title}
+            </a>
+          </h2>
+
+          <div class="link-domain">
+            <span class="domain-text">{getDomain(link.data.url)}</span>
+          </div>
+
+          <div class="link-body">
+            <div class="link-content collapsed" data-id={i}>
+              <LinkContent />
+            </div>
+            <button class="expand-btn" data-id={i}>查看更多 ↓</button>
+          </div>
+        </article>
+        );
+      })}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .links-page {
+    max-width: 100%;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.35rem;
+  }
+
+  .page-desc {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .link-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .link-item {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .link-item:last-child {
+    border-bottom: none;
+  }
+
+  .link-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.75rem;
+    padding: 0.15em 0.6em;
+    border-radius: 999px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .tag-article {
+    background: #e8f0fe;
+    color: #1a56db;
+  }
+
+  .tag-link {
+    background: #f0fdf4;
+    color: #16a34a;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .tag-article {
+      background: #1e3a5f;
+      color: #93b4fd;
+    }
+    .tag-link {
+      background: #14291a;
+      color: #6ee79a;
+    }
+  }
+
+  .link-time {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  .link-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    line-height: 1.4;
+  }
+
+  .link-title a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+
+  .link-title a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .link-domain {
+    margin-bottom: 0.75rem;
+  }
+
+  .domain-text {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+  }
+
+  .link-body {
+    position: relative;
+  }
+
+  .link-content {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    overflow: hidden;
+  }
+
+  .link-content.collapsed {
+    max-height: 4.8em; /* ~3 lines */
+    -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  }
+
+  .link-content.expanded {
+    max-height: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .link-content :global(p) {
+    margin-bottom: 0.75rem;
+  }
+
+  .link-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .expand-btn {
+    background: none;
+    border: none;
+    padding: 0.35rem 0;
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    margin-top: 0.35rem;
+    display: block;
+  }
+
+  .expand-btn:hover {
+    color: var(--color-text);
+  }
+
+  .expand-btn.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.expand-btn').forEach((btn) => {
+    const id = btn.dataset.id;
+    const content = document.querySelector<HTMLElement>(`.link-content[data-id="${id}"]`);
+    if (!content) return;
+
+    // 如果内容不超出，隐藏按钮
+    if (content.scrollHeight <= content.clientHeight + 4) {
+      btn.classList.add('hidden');
+      content.classList.remove('collapsed');
+      return;
+    }
+
+    btn.addEventListener('click', () => {
+      const isCollapsed = content.classList.contains('collapsed');
+      content.classList.toggle('collapsed', !isCollapsed);
+      content.classList.toggle('expanded', isCollapsed);
+      btn.textContent = isCollapsed ? '收起 ↑' : '查看更多 ↓';
+    });
+  });
+</script>

@@ -11,4 +11,14 @@ const posts = defineCollection({
   }),
 });
 
-export const collections = { posts };
+const links = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    url: z.string().url(),
+    date: z.coerce.date(),
+    type: z.enum(['article', 'link']).default('link'),
+  }),
+});
+
+export const collections = { posts, links };
