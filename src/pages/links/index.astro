@@ -1,12 +1,32 @@
 ---
-import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 
-const allLinks = (await getCollection('links')).sort(
-  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
-);
+const PB_URL = 'http://lazycat1012.heiyu.space:8090';
 
-function relativeTime(date: Date): string {
+interface LinkRecord {
+  id: string;
+  title: string;
+  url: string;
+  type: string[];
+  description: string;
+  image: string;
+  created: string;
+}
+
+let allLinks: LinkRecord[] = [];
+try {
+  const res = await fetch(
+    `${PB_URL}/api/collections/links/records?sort=-created&perPage=200`,
+    { signal: AbortSignal.timeout(8000) }
+  );
+  const data = await res.json();
+  allLinks = data.items ?? [];
+} catch (e) {
+  console.error('Failed to fetch links from PocketBase:', e);
+}
+
+function relativeTime(dateStr: string): string {
+  const date = new Date(dateStr);
   const now = new Date();
   const diff = now.getTime() - date.getTime();
   const mins = Math.floor(diff / 60000);
@@ -46,9 +66,9 @@ async function fetchOgImage(url: string): Promise<string | null> {
 
 const renderedLinks = await Promise.all(
   allLinks.map(async (link) => {
-    const { Content } = await link.render();
-    const image = link.data.image ?? (await fetchOgImage(link.data.url));
-    return { ...link, Content, image };
+    const image = link.image || (await fetchOgImage(link.url));
+    const linkType = Array.isArray(link.type) ? link.type[0] : link.type;
+    return { ...link, image, linkType };
   })
 );
 ---
@@ -59,22 +79,20 @@ const renderedLinks = await Promise.all(
     <p class="page-desc">值得一读的文章和链接。</p>
 
     <div class="link-list">
-      {renderedLinks.map((link, i) => {
-        const LinkContent = link.Content;
-        return (
+      {renderedLinks.map((link, i) => (
         <article class="link-item">
           <!-- 卡片头部：标题 + 缩略图 -->
           <div class="link-card-header">
             <div class="link-card-left">
               <h2 class="link-title">
-                <a href={link.data.url} target="_blank" rel="noopener noreferrer">
-                  {link.data.title}
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  {link.title}
                 </a>
               </h2>
-              <span class="domain-text">{getDomain(link.data.url)}</span>
+              <span class="domain-text">{getDomain(link.url)}</span>
             </div>
             {link.image && (
-              <a href={link.data.url} target="_blank" rel="noopener noreferrer" class="link-thumb">
+              <a href={link.url} target="_blank" rel="noopener noreferrer" class="link-thumb">
                 <img src={link.image} alt="" loading="lazy" />
               </a>
             )}
@@ -83,21 +101,20 @@ const renderedLinks = await Promise.all(
           <!-- 摘要正文 -->
           <div class="link-body">
             <div class="link-content collapsed" data-id={i}>
-              <LinkContent />
+              <Fragment set:html={link.description} />
             </div>
             <button class="expand-btn" data-id={i}>查看更多</button>
           </div>
 
           <!-- 底部：标签 + 时间 -->
           <div class="link-footer">
-            <span class={`tag tag-${link.data.type}`}>
-              #{link.data.type === 'article' ? 'Article' : 'Link'}
+            <span class={`tag tag-${link.linkType}`}>
+              #{link.linkType === 'article' ? 'Article' : 'Link'}
             </span>
-            <span class="link-time">{relativeTime(link.data.date)}</span>
+            <span class="link-time">{relativeTime(link.created)}</span>
           </div>
         </article>
-        );
-      })}
+      ))}
     </div>
   </div>
 </Layout>
