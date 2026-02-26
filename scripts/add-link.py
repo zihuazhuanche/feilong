@@ -134,7 +134,8 @@ def trigger_deploy():
 
 def main():
     if len(sys.argv) < 2:
-        print("用法: python3 scripts/add-link.py <url> [article|link]")
+        print("用法: python3 scripts/add-link.py <url> [article|link] [-y]")
+        print("  -y / --yes  跳过确认直接写入")
         print("环境变量: GH_TOKEN=<github_pat>  (必填)")
         sys.exit(1)
 
@@ -143,7 +144,13 @@ def main():
         sys.exit(1)
 
     url = sys.argv[1]
-    link_type = sys.argv[2] if len(sys.argv) > 2 else "article"
+    link_type = "article"
+    auto_yes = False
+    for arg in sys.argv[2:]:
+        if arg in ("-y", "--yes"):
+            auto_yes = True
+        elif not arg.startswith("-"):
+            link_type = arg
 
     print(f"🔍 抓取: {url}")
     meta, _ = fetch_meta(url)
@@ -153,7 +160,14 @@ def main():
     image = meta.get("image", "")
 
     if not title:
-        title = input("未能提取标题，请手动输入: ").strip()
+        # 强制从终端读，不受 stdin pipe 影响
+        try:
+            with open("/dev/tty") as tty:
+                sys.stdout.write("未能提取标题，请手动输入: ")
+                sys.stdout.flush()
+                title = tty.readline().strip()
+        except Exception:
+            title = input("未能提取标题，请手动输入: ").strip()
 
     print()
     print(f"📝 标题: {title}")
@@ -163,7 +177,16 @@ def main():
     print(f"📄 描述: {desc[:100]}{'...' if len(desc) > 100 else ''}")
     print()
 
-    confirm = input("确认写入？[Y/n] ").strip() or "Y"
+    if auto_yes:
+        confirm = "y"
+    else:
+        try:
+            with open("/dev/tty") as _tty:
+                sys.stdout.write("确认写入？[Y/n] ")
+                sys.stdout.flush()
+                confirm = _tty.readline().strip() or "Y"
+        except Exception:
+            confirm = input("确认写入？[Y/n] ").strip() or "Y"
     if confirm.lower() != "y":
         print("已取消")
         return
