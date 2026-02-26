@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: '*/30 * * * *'  # 每 30 分钟自动 rebuild
 
 permissions:
   contents: read
