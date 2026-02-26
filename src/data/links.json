@@ -1,0 +1,29 @@
+[
+  {
+    "id": "yqhc1s0yoceifqq",
+    "title": "GitHub - withastro/astro: The web framework for content-driven websites. ⭐️ Star to support our work!",
+    "url": "https://github.com/withastro/astro",
+    "type": ["link"],
+    "description": "<p>The web framework for content-driven websites. ⭐️ Star to support our work! - withastro/astro</p>",
+    "image": "https://opengraph.githubassets.com/9ed1bf8f6e3e7652761aeae44631a1105cf0306ac739f0bf080d47371264c142/withastro/astro",
+    "created": "2026-02-26 05:26:38.000Z"
+  },
+  {
+    "id": "fd69jwxn0wjeo4k",
+    "title": "科技爱好者周刊（第 336 期）：面对 AI，互联网正在衰落 - 阮一峰的网络日志",
+    "url": "https://www.ruanyifeng.com/blog/2025/02/weekly-issue-336.html",
+    "type": ["article"],
+    "description": "",
+    "image": "",
+    "created": "2026-02-26 05:13:15.000Z"
+  },
+  {
+    "id": "rd1oo9zt0c5yz1i",
+    "title": "Claude.md - 为 AI 助手定制行为规范的新范式",
+    "url": "https://timkellogg.me/blog/2025/02/11/claude-md",
+    "type": ["article"],
+    "description": "<p>Claude.md 是一种在代码库根目录放置 Markdown 文件来定制 AI 助手行为的新范式，通过项目级上下文让 AI 更懂你的代码风格和约定。</p>",
+    "image": "",
+    "created": "2026-02-26 05:07:45.000Z"
+  }
+]
