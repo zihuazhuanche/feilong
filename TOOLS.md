@@ -55,3 +55,9 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 ### Memory
 - Daily notes: memory/YYYY-MM-DD.md
 - Long-term: MEMORY.md
+
+### Security Notes
+- **API Tokens**: Never push sensitive tokens to public repositories
+- **GitHub Protection**: GitHub automatically detects and blocks secrets in pushes
+- **Environment Variables**: Sensitive data should be kept in .env files (excluded from git)
+- **Git Ignore**: Always maintain .gitignore to protect sensitive files
