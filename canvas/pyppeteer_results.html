@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyppeteer测试结果 - Obsidian访问</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .status-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .status-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .status-details {
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+        
+        .screenshot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .screenshot-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid #e9ecef;
+        }
+        
+        .screenshot-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .screenshot-img {
+            max-width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .screenshot-img:hover {
+            transform: scale(1.02);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .info-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid #4CAF50;
+        }
+        
+        .info-card.warning {
+            border-left-color: #ff9800;
+        }
+        
+        .info-card.error {
+            border-left-color: #f44336;
+        }
+        
+        .info-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .info-content {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .conclusion {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            border: 1px solid #c8e6c9;
+        }
+        
+        .conclusion-title {
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2e7d32;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-primary {
+            background: #4CAF50;
+        }
+        
+        .btn-primary:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+        }
+        
+        .btn-secondary {
+            background: #2196F3;
+        }
+        
+        .btn-secondary:hover {
+            background: #0b7dda;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(33, 150, 243, 0.3);
+        }
+        
+        .btn-warning {
+            background: #ff9800;
+        }
+        
+        .btn-warning:hover {
+            background: #e68900;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 152, 0, 0.3);
+        }
+        
+        .timestamp {
+            text-align: center;
+            color: #666;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        @media (max-width: 768px) {
+            .screenshot-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🐍 Pyppeteer测试结果</h1>
+        <div class="subtitle">Docker容器内的无头浏览器访问Obsidian</div>
+        
+        <div class="status-card">
+            <div class="status-title">✅ 测试成功完成</div>
+            <div class="status-details">
+                使用Pyppeteer无头浏览器成功访问了Obsidian登录页面，并生成了截图。
+                由于IP限制，自动登录可能失败，但可以获取页面内容和截图。
+            </div>
+        </div>
+        
+        <div class="screenshot-grid">
+            <div class="screenshot-card">
+                <div class="screenshot-title">登录页面截图</div>
+                <img src="/__openclaw__/canvas/obsidian_login_page.png" 
+                     alt="Obsidian登录页面" 
+                     class="screenshot-img"
+                     onclick="openModal(this.src)">
+                <div>文件: obsidian_login_page.png</div>
+                <div>页面标题: Login to LazyCat Microservices</div>
+            </div>
+            
+            <div class="screenshot-card">
+                <div class="screenshot-title">完整页面截图</div>
+                <img src="/__openclaw__/canvas/obsidian_direct_access.png" 
+                     alt="Obsidian完整页面" 
+                     class="screenshot-img"
+                     onclick="openModal(this.src)">
+                <div>文件: obsidian_direct_access.png</div>
+                <div>页面内容: 60字符文本</div>
+            </div>
+        </div>
+        
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-title">🌐 访问结果</div>
+                <div class="info-content">
+                    <p><strong>目标URL:</strong> https://obsidian.lazycat1012.heiyu.space/</p>
+                    <p><strong>重定向到:</strong> https://lazycat1012.heiyu.space/sys/login</p>
+                    <p><strong>页面标题:</strong> Login to LazyCat Microservices</p>
+                    <p><strong>检测到:</strong> 登录表单页面</p>
+                </div>
+            </div>
+            
+            <div class="info-card warning">
+                <div class="info-title">⚠️ 已知限制</div>
+                <div class="info-content">
+                    <p><strong>IP限制:</strong> 之前测试显示IP地址限制</p>
+                    <p><strong>错误信息:</strong> "can't find login info for this ip"</p>
+                    <p><strong>当前IP:</strong> 223.88.61.216</p>
+                    <p><strong>影响:</strong> 自动登录可能失败</p>
+                </div>
+            </div>
+            
+            <div class="info-card">
+                <div class="info-title">🔧 技术环境</div>
+                <div class="info-content">
+                    <p><strong>浏览器:</strong> Pyppeteer (Chromium)</p>
+                    <p><strong>模式:</strong> 无头模式 (Headless)</p>
+                    <p><strong>环境:</strong> Docker容器内</p>
+                    <p><strong>User-Agent:</strong> Chrome 120.0.0.0</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="conclusion">
+            <div class="conclusion-title">🎯 结论与建议</div>
+            <p><strong>Pyppeteer工作正常:</strong> 可以在容器内访问网页并生成截图</p>
+            <p><strong>主要障碍:</strong> IP地址限制阻止自动登录</p>
+            <p><strong>解决方案:</strong> </p>
+            <ol>
+                <li><strong>导出笔记处理</strong> - 你导出Obsidian笔记，我帮你处理内容</li>
+                <li><strong>IP白名单</strong> - 将223.88.61.216加入白名单</li>
+                <li><strong>使用其他方法</strong> - 安装Playwright尝试不同浏览器引擎</li>
+            </ol>
+        </div>
+        
+        <div class="action-buttons">
+            <a href="/__openclaw__/canvas/obsidian_login_page.png" target="_blank" class="btn btn-primary">
+                <span>📥</span> 查看登录页面截图
+            </a>
+            <a href="/__openclaw__/canvas/obsidian_direct_access.png" target="_blank" class="btn btn-secondary">
+                <span>🌐</span> 查看完整页面截图
+            </a>
+            <a href="/__openclaw__/canvas/browser_options.html" class="btn btn-warning">
+                <span>🔧</span> 查看所有浏览器选项
+            </a>
+        </div>
+        
+        <div class="timestamp" id="timestamp">
+            页面生成时间: 2026-02-04 16:37 UTC
+        </div>
+    </div>
+    
+    <!-- 图片模态框 -->
+    <div class="modal" id="imageModal" onclick="closeModal()">
+        <div class="close-modal" onclick="closeModal()">×</div>
+        <img class="modal-img" id="modalImage" src="" alt="放大图片">
+    </div>
+    
+    <script>
+        // 图片模态框功能
+        function openModal(src) {
+            document.getElementById('modalImage').src = src;
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+        
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        
+        // 点击模态框背景关闭
+        document.getElementById('imageModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+        
+        // 更新时间戳
+        function updateTimestamp() {
+            const now = new Date();
+            const options = { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'UTC'
+            };
+            const timeStr = now.toLocaleString('zh-CN', options) + ' UTC';
+            document.getElementById('timestamp').textContent = `页面生成时间: ${timeStr}`;
+        }
+        
+        // 初始更新
+        updateTimestamp();
+        
+        // 每30秒更新一次
+        setInterval(updateTimestamp, 30000);
+    </script>
+</body>
+</html>

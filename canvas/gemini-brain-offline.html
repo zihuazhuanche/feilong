@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Brain 技能 - 离线查看版</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+        }
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+        }
+        .status-badge {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+        .section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section h2 i {
+            color: #667eea;
+        }
+        .file-tree {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            line-height: 1.8;
+            margin: 15px 0;
+            overflow-x: auto;
+        }
+        .dir { color: #63b3ed; }
+        .file { color: #68d391; }
+        .size { color: #a0aec0; font-size: 0.9em; }
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+        .feature h3 {
+            color: #4299e1;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .code-block {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #4299e1;
+        }
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .config-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .config-key {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+        .config-value {
+            color: #4a5568;
+            font-family: 'Courier New', monospace;
+            background: #f7fafc;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .steps {
+            counter-reset: step;
+            margin: 20px 0;
+        }
+        .step {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #4299e1;
+            position: relative;
+            padding-left: 60px;
+        }
+        .step:before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            background: #4299e1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+            color: #718096;
+            font-size: 0.9em;
+        }
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-brain"></i> Gemini Brain 技能</h1>
+            <div class="subtitle">将 Google Gemini 作为 OpenClaw 的扩展大脑</div>
+            <div class="status-badge">✅ 已安装 | 等待 API 密钥配置</div>
+        </header>
+
+        <div class="section">
+            <h2><i class="fas fa-folder-tree"></i> 文件结构</h2>
+            <div class="file-tree">
+                <div class="dir">skills/gemini-brain/</div>
+                <div class="file">├── SKILL.md <span class="size">(7.4KB - 完整文档)</span></div>
+                <div class="file">├── config.yaml <span class="size">(配置文件)</span></div>
+                <div class="dir">├── scripts/</div>
+                <div class="file">│   ├── gemini_brain.py <span class="size">(10.5KB - 核心模块)</span></div>
+                <div class="file">│   └── openclaw_integration.py <span class="size">(9.9KB - 集成模块)</span></div>
+                <div class="dir">├── examples/ <span class="size">(示例文件)</span></div>
+                <div class="file">├── install_and_test.sh <span class="size">(安装脚本)</span></div>
+                <div class="file">├── quick_test.py <span class="size">(快速测试)</span></div>
+                <div class="file">└── test_basic_functionality.py <span class="size">(功能测试)</span></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-star"></i> 核心功能</h2>
+            <div class="features">
+                <div class="feature">
+                    <h3><i class="fas fa-comments"></i> 智能问答</h3>
+                    <p>使用 Gemini 进行深度思考和问题解答，支持上下文对话。</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-search"></i> 实时搜索</h3>
+                    <p>结合 Gemini 的搜索能力获取最新信息和网络资源。</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-code"></i> 代码生成</h3>
+                    <p>支持 Python、JavaScript、Go、Rust 等多种编程语言。</p>
+                </div>
+                <div class="feature">
+                    <h3><i class="fas fa-file-alt"></i> 文档分析</h3>
+                    <p>上传 PDF、Word、Excel 等文件进行分析处理。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-cogs"></i> 配置示例</h2>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="config-key">模型</div>
+                    <div class="config-value">gemini-2.0-flash</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">温度</div>
+                    <div class="config-value">0.7</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">最大输出</div>
+                    <div class="config-value">2048 tokens</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">支持语言</div>
+                    <div class="config-value">Python, JS, Go, Rust</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">搜索功能</div>
+                    <div class="config-value">已启用</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-key">安全过滤</div>
+                    <div class="config-value">已启用</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-code"></i> 使用示例</h2>
+            <div class="code-block">
+# 基础使用<br>
+openclaw skill gemini-brain "你的问题"<br><br>
+# 代码生成<br>
+openclaw skill gemini-brain "用Python写一个快速排序算法"<br><br>
+# 问题分析<br>
+openclaw skill gemini-brain "分析AI行业发展趋势"<br><br>
+# 高级功能<br>
+openclaw skill gemini-brain --context "之前对话" "新问题"<br>
+openclaw skill gemini-brain --file document.pdf "总结文档"<br>
+openclaw skill gemini-brain --code python "审查代码"
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><i class="fas fa-rocket"></i> 快速开始</h2>
+            <div class="steps">
+                <div class="step">获取 Google Gemini API 密钥</div>
+                <div class="step">设置环境变量: <code>export GEMINI_API_KEY="your-key"</code></div>
+                <div class="step">安装依赖: <code>pip install google-generativeai</code></div>
+                <div class="step">运行测试: <code>python skills/gemini-brain/quick_test.py</code></div>
+                <div class="step">开始使用 Gemini Brain 技能！</div>
+            </div>
+        </div>
+
+        <div style="text-align: center;">
+            <a href="#" class="download-btn" onclick="downloadPage()">
+                <i class="fas fa-download"></i> 保存此页面
+            </a>
+            <p style="color: #666; margin-top: 10px; font-size: 0.9em;">
+                点击保存后，可以在浏览器中直接打开查看
+            </p>
+        </div>
+
+        <footer>
+            <p>📁 技能路径: <code>/home/node/clawd/skills/gemini-brain/</code></p>
+            <p>🕒 生成时间: 2026-02-16 08:37:30 UTC</p>
+            <p>🔧 工作空间: /home/node/clawd | Docker 容器环境</p>
+            <p>⚠️ Canvas 服务需要登录认证，已提供离线查看方案</p>
+        </footer>
+    </div>
+
+    <script>
+        function downloadPage() {
+            const htmlContent = document.documentElement.outerHTML;
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'gemini-brain-skill.html';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            alert('页面已保存为 gemini-brain-skill.html\n可以在浏览器中直接打开查看');
+        }
+
+        // 页面加载完成
+        console.log('Gemini Brain 技能离线页面已加载');
+        console.log('Canvas 服务状态: 需要登录认证');
+        console.log('已创建离线查看方案');
+    </script>
+</body>
+</html>

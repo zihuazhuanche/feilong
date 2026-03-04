@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edge-TTS 语音合成演示</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .tts-demo {
+            background: linear-gradient(135deg, #4ecdc4, #44a08d);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .audio-player {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+        }
+        .text-input {
+            width: 100%;
+            min-height: 150px;
+            padding: 20px;
+            border: 2px solid #3498db;
+            border-radius: 15px;
+            font-size: 16px;
+            font-family: inherit;
+            margin: 20px 0;
+            resize: vertical;
+        }
+        .voice-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .voice-option {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .voice-option:hover {
+            border-color: #3498db;
+            transform: translateY(-3px);
+        }
+        .voice-option.selected {
+            border-color: #2ecc71;
+            background: #f0fff4;
+        }
+        .generate-btn {
+            display: block;
+            width: 100%;
+            background: #3498db;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 30px 0;
+        }
+        .generate-btn:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+        .code-example {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .timestamp {
+            color: #7f8c8d;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎵 Edge-TTS 语音合成演示</h1>
+            <p>OpenClaw 内置 TTS 工具测试 | 生成时间: 2026-02-04 10:55 UTC</p>
+        </div>
+
+        <div class="tts-demo">
+            <h2>✅ TTS 工具测试成功！</h2>
+            <p>已成功生成测试音频文件</p>
+            
+            <div class="audio-player">
+                <h3>测试音频播放:</h3>
+                <audio controls style="width: 100%;">
+                    <source src="/__openclaw__/canvas/tts-test.mp3" type="audio/mpeg">
+                    您的浏览器不支持音频播放。
+                </audio>
+                <p style="margin-top: 10px; font-size: 0.9em;">
+                    📁 文件: tts-test.mp3 | 🎵 内容: "测试 edge-tts 功能。这是一个语音合成测试。你好，世界！"
+                </p>
+            </div>
+        </div>
+
+        <h2>✍️ 自定义文本转语音</h2>
+        <textarea class="text-input" id="tts-text" placeholder="请输入要转换为语音的文本...">
+欢迎使用 OpenClaw 的 TTS 功能。
+这是一个文本转语音的演示。
+你可以输入任何文本，系统会将其转换为语音。
+支持中文、英文等多种语言。
+        </textarea>
+
+        <h2>🗣️ 语音选项（示例）</h2>
+        <div class="voice-options">
+            <div class="voice-option" data-voice="zh-CN">
+                <div style="font-size: 1.5em;">🇨🇳</div>
+                <h3>中文普通话</h3>
+                <p>标准中文发音</p>
+            </div>
+            <div class="voice-option" data-voice="en-US">
+                <div style="font-size: 1.5em;">🇺🇸</div>
+                <h3>美式英语</h3>
+                <p>标准美国英语</p>
+            </div>
+            <div class="voice-option" data-voice="en-GB">
+                <div style="font-size: 1.5em;">🇬🇧</div>
+                <h3>英式英语</h3>
+                <p>标准英国英语</p>
+            </div>
+            <div class="voice-option" data-voice="ja-JP">
+                <div style="font-size: 1.5em;">🇯🇵</div>
+                <h3>日语</h3>
+                <p>标准日语发音</p>
+            </div>
+        </div>
+
+        <button class="generate-btn" id="generate-tts">
+            🎵 生成语音
+        </button>
+
+        <h2>🔧 TTS 工具调用代码</h2>
+        <div class="code-example">
+// OpenClaw TTS 工具调用示例
+const ttsResult = await tts({
+    text: "要转换的文本内容",
+    channel: "telegram" // 可选：指定输出格式
+});
+
+// 返回的音频文件路径
+console.log(ttsResult); // MEDIA:/tmp/tts-xxxx/voice-xxxx.mp3
+
+// 实际使用示例：
+// 1. 简单文本转语音
+tts({ text: "你好，世界！" });
+
+// 2. 长文本转语音
+tts({ text: "这是一个较长的文本段落..." });
+
+// 3. 指定输出格式（如 Telegram）
+tts({ text: "测试消息", channel: "telegram" });
+        </div>
+
+        <h2>📋 TTS 功能特性</h2>
+        <div class="voice-options">
+            <div class="voice-option">
+                <h3>🎯 高质量语音</h3>
+                <p>自然流畅的语音合成</p>
+            </div>
+            <div class="voice-option">
+                <h3>🌍 多语言支持</h3>
+                <p>支持多种语言和方言</p>
+            </div>
+            <div class="voice-option">
+                <h3>⚡ 快速生成</h3>
+                <p>实时文本转语音</p>
+            </div>
+            <div class="voice-option">
+                <h3>🔧 简单集成</h3>
+                <p>易于在应用中集成</p>
+            </div>
+        </div>
+
+        <div class="timestamp">
+            TTS 演示页面生成时间: 2026-02-04 10:55 UTC<br>
+            TTS 工具状态: ✅ 正常工作 | 测试音频: tts-test.mp3<br>
+            支持格式: MP3 音频 | 调用方式: tts({text: "内容"})
+        </div>
+    </div>
+
+    <script>
+        // 语音选择
+        const voiceOptions = document.querySelectorAll('.voice-option');
+        let selectedVoice = 'zh-CN';
+        
+        voiceOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // 移除之前的选择
+                voiceOptions.forEach(opt => opt.classList.remove('selected'));
+                
+                // 设置当前选择
+                this.classList.add('selected');
+                selectedVoice = this.dataset.voice;
+                
+                // 更新提示
+                const voiceName = this.querySelector('h3').textContent;
+                alert(`已选择语音: ${voiceName}`);
+            });
+        });
+
+        // 默认选择中文
+        document.querySelector('.voice-option[data-voice="zh-CN"]').classList.add('selected');
+
+        // 生成 TTS
+        document.getElementById('generate-tts').addEventListener('click', function() {
+            const text = document.getElementById('tts-text').value.trim();
+            
+            if (!text) {
+                alert('请输入要转换的文本！');
+                return;
+            }
+            
+            if (text.length > 1000) {
+                alert('文本过长，建议分段处理！');
+                return;
+            }
+            
+            this.innerHTML = '🔄 生成中...';
+            this.disabled = true;
+            
+            // 模拟生成过程
+            setTimeout(() => {
+                alert(`TTS 生成请求已发送！\n\n语音: ${selectedVoice}\n文本长度: ${text.length} 字符\n\n实际环境中会调用 OpenClaw TTS 工具生成音频文件。`);
+                
+                this.innerHTML = '🎵 生成语音';
+                this.disabled = false;
+                
+                // 更新音频播放器（模拟）
+                const audioPlayer = document.querySelector('audio');
+                const source = audioPlayer.querySelector('source');
+                source.src = `/__openclaw__/canvas/tts-generated.mp3?t=${Date.now()}`;
+                audioPlayer.load();
+                
+                // 更新文件信息
+                const fileInfo = audioPlayer.parentElement.querySelector('p');
+                fileInfo.innerHTML = `📁 文件: tts-generated.mp3 | 🎵 内容: "${text.substring(0, 50)}${text.length > 50 ? '...' : ''}"`;
+            }, 1500);
+        });
+
+        // 页面加载时播放测试音频
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.querySelector('audio');
+            audio.volume = 0.7;
+            
+            // 显示 TTS 工具信息
+            const ttsDemo = document.querySelector('.tts-demo');
+            ttsDemo.addEventListener('click', function() {
+                alert('OpenClaw TTS 工具信息：\n\n• 工具名称: tts\n• 输出格式: MP3\n• 调用方式: tts({text: "内容"})\n• 返回: MEDIA: 路径\n• 状态: ✅ 正常工作');
+            });
+        });
+    </script>
+</body>
+</html>

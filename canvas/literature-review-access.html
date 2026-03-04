@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统文献综述访问页面</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+        
+        .project-info {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #26d0ce;
+        }
+        
+        .section {
+            padding: 25px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        h2 {
+            color: #1a2980;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        h2 i {
+            font-size: 1.5rem;
+        }
+        
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .file-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .file-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .file-card h3 {
+            color: #26d0ce;
+            margin-bottom: 10px;
+            font-size: 1.3rem;
+        }
+        
+        .file-path {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin: 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #e0e0e0;
+        }
+        
+        .access-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .link-card {
+            flex: 1;
+            min-width: 200px;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .link-card h4 {
+            color: #1a2980;
+            margin-bottom: 10px;
+        }
+        
+        .link-url {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9rem;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 10px;
+            }
+            
+            header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .file-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-file-alt"></i> 系统文献综述访问页面</h1>
+            <div class="subtitle">MAdCAM-1与E-Cadherin双重阻断策略研究 - Premium级综述</div>
+            <div style="margin-top: 10px; font-size: 1rem;">
+                <span style="background: rgba(255,255,255,0.2); padding: 5px 15px; border-radius: 20px;">
+                    <i class="fas fa-check-circle"></i> 项目已完成
+                </span>
+            </div>
+        </header>
+        
+        <div class="project-info">
+            <h2><i class="fas fa-info-circle"></i> 项目信息</h2>
+            <p><strong>项目名称：</strong>MAdCAM-1-E-Cadherin-Dual-Blockade-01</p>
+            <p><strong>综述主题：</strong>MAdCAM-1与E-Cadherin双重阻断策略在脑出血后神经炎症中的治疗潜力与机制研究</p>
+            <p><strong>综述级别：</strong>Premium（旗舰级）</p>
+            <p><strong>完成时间：</strong>2026年2月4日</p>
+            <p><strong>文献数量：</strong>36篇（28篇高分文献）</p>
+            <p><strong>章节数量：</strong>11章</p>
+            <p><strong>目标字数：</strong>11,600字</p>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-folder-open"></i> 文件夹位置</h2>
+            <div class="file-path">
+                /home/node/clawd/skills/systematic-literature-review/MAdCAM-1-E-Cadherin-Dual-Blockade-01/
+            </div>
+            <p>这是项目的主文件夹，包含所有生成的文件。</p>
+            
+            <div class="access-links">
+                <div class="link-card">
+                    <h4><i class="fas fa-link"></i> 项目总结</h4>
+                    <div class="link-url" id="summaryUrl">
+                        加载中...
+                    </div>
+                    <button class="btn" onclick="copyUrl('summaryUrl')">
+                        <i class="fas fa-copy"></i> 复制链接
+                    </button>
+                </div>
+                
+                <div class="link-card">
+                    <h4><i class="fas fa-file-pdf"></i> 综述文档</h4>
+                    <div class="link-url" id="reviewUrl">
+                        加载中...
+                    </div>
+                    <button class="btn" onclick="copyUrl('reviewUrl')">
+                        <i class="fas fa-copy"></i> 复制链接
+                    </button>
+                </div>
+                
+                <div class="link-card">
+                    <h4><i class="fas fa-book"></i> 参考文献</h4>
+                    <div class="link-url" id="refUrl">
+                        加载中...
+                    </div>
+                    <button class="btn" onclick="copyUrl('refUrl')">
+                        <i class="fas fa-copy"></i> 复制链接
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-file"></i> 主要文件</h2>
+            <div class="file-grid">
+                <div class="file-card">
+                    <h3><i class="fas fa-file-alt"></i> 综述文档</h3>
+                    <div class="file-path">review_final.tex</div>
+                    <p>完整的LaTeX格式综述文档，包含11个章节，可直接编译为PDF。</p>
+                    <button class="btn" onclick="openFile('review_final.tex')">
+                        <i class="fas fa-eye"></i> 查看文档
+                    </button>
+                </div>
+                
+                <div class="file-card">
+                    <h3><i class="fas fa-book"></i> 参考文献</h3>
+                    <div class="file-path">references.bib</div>
+                    <p>BibTeX格式参考文献库，包含10篇核心文献的完整引用信息。</p>
+                    <button class="btn" onclick="openFile('references.bib')">
+                        <i class="fas fa-eye"></i> 查看文献
+                    </button>
+                </div>
+                
+                <div class="file-card">
+                    <h3><i class="fas fa-clipboard-list"></i> 项目总结</h3>
+                    <div class="file-path">project_summary.md</div>
+                    <p>完整的项目总结报告，包含项目概况、处理流程和学术贡献。</p>
+                    <button class="btn" onclick="openFile('project_summary.md')">
+                        <i class="fas fa-eye"></i> 查看总结
+                    </button>
+                </div>
+                
+                <div class="file-card">
+                    <h3><i class="fas fa-chart-bar"></i> 技术报告</h3>
+                    <div class="file-path">final_report.json</div>
+                    <p>详细的技术报告，包含所有处理阶段的统计数据和结果分析。</p>
+                    <button class="btn btn-secondary" onclick="openFile('final_report.json')">
+                        <i class="fas fa-code"></i> 查看JSON
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-download"></i> 快速操作</h2>
+            <div style="text-align: center; margin: 20px 0;">
+                <button class="btn" onclick="downloadAllFiles()">
+                    <i class="fas fa-download"></i> 下载所有文件
+                </button>
+                <button class="btn btn-secondary" onclick="showFolderStructure()">
+                    <i class="fas fa-sitemap"></i> 查看文件夹结构
+                </button>
+                <button class="btn btn-secondary" onclick="compileToPDF()">
+                    <i class="fas fa-file-pdf"></i> 编译为PDF
+                </button>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2026 系统文献综述项目 | Premium级旗舰综述</p>
+            <p>基于 systematic-literature-review 技能生成 | 访问域名: openclaw.lazycat1012.heiyu.space</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 设置基础URL
+        const baseUrl = 'https://openclaw.lazycat1012.heiyu.space/__openclaw__/canvas';
+        const projectPath = '/skills/systematic-literature-review/MAdCAM-1-E-Cadherin-Dual-Blockade-01';
+        
+        // 初始化URL显示
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('summaryUrl').textContent = baseUrl + projectPath + '/project_summary.md';
+            document.getElementById('reviewUrl').textContent = baseUrl + projectPath + '/review_final.tex';
+            document.getElementById('refUrl').textContent = baseUrl + projectPath + '/references.bib';
+        });
+        
+        function copyUrl(elementId) {
+            const url = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('链接已复制到剪贴板！\n\n' + url);
+            });
+        }
+        
+        function openFile(filename) {
+            const url = baseUrl + projectPath + '/' + filename;
+            window.open(url, '_blank');
+        }
+        
+        function downloadAllFiles() {
+            const files = [
+                'review_final.tex',
+                'references.bib', 
+                'project_summary.md',
+                'final_report.json',
+                'writing_summary.md',
+                'scoring_report.json'
+            ];
+            
+            let downloadMessage = '可以下载以下文件：\n\n';
+            files.forEach(file => {
+                const url = baseUrl + projectPath + '/' + file;
+                downloadMessage += `${file}\n${url}\n\n`;
+            });
+            
+            alert(downloadMessage + '请复制上述链接在浏览器中访问下载。');
+        }
+        
+        function showFolderStructure() {
+            const structure = `
+项目文件夹结构：
+MAdCAM-1-E-Cadherin-Dual-Blockade-01/
+├── review_final.tex          # 完整综述文档 (LaTeX)
+├── references.bib            # 参考文献库 (BibTeX)
+├── project_summary.md        # 项目总结报告
+├── final_report.json         # 技术详细报告
+├── writing_summary.md        # 写作进度报告
+├── scoring_report.json       # 文献评分报告
+├── search_log.json           # 检索过程记录
+├── search_queries.json       # 检索策略文件
+├── deduplication_summary.md  # 去重分析报告
+├── writing_report.json       # 写作详细报告
+└── papers/                   # 文献数据目录
+    ├── initial_papers.jsonl      # 初始文献
+    ├── deduplicated_papers.jsonl # 去重后文献
+    └── scored_papers.jsonl       # 评分后文献
+            `.trim();
+            
+            alert(structure);
+        }
+        
+        function compileToPDF() {
+            alert('LaTeX编译为PDF功能：\n\n1. 访问综述文档: ' + baseUrl + projectPath + '/review_final.tex\n2. 复制LaTeX代码\n3. 在Overleaf或本地LaTeX环境中编译\n4. 生成PDF格式的完整综述');
+        }
+        
+        // 自动生成访问链接
+        function generateAccessLinks() {
+            const links = [
+                {name: '项目主页', url: baseUrl + '/literature-review-access.html'},
+                {name: '综述文档', url: baseUrl + projectPath + '/review_final.tex'},
+                {name: '项目总结', url: baseUrl + projectPath + '/project_summary.md'},
+                {name: '参考文献', url: baseUrl + projectPath + '/references.bib'}
+            ];
+            
+            let linksText = '快速访问链接：\n\n';
+            links.forEach(link => {
+                linksText += `${link.name}:\n${link.url}\n\n`;
+            });
+            
+            return linksText;
+        }
+        
+        // 页面加载时显示主要链接
+        window.onload = function() {
+            console.log('项目访问链接已生成：\n' + generateAccessLinks());
+        };
+    </script>
+</body>
+</html>

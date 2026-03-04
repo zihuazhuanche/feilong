@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统文献综述 - 访问页面</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .content {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .file-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+        
+        .file-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #26d0ce;
+        }
+        
+        .file-name {
+            font-weight: bold;
+            color: #1a2980;
+        }
+        
+        .file-desc {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1a2980;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #26d0ce;
+        }
+        
+        .url-box {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            word-break: break-all;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>系统文献综述访问页面</h1>
+        <p>MAdCAM-1与E-Cadherin双重阻断策略研究</p>
+    </div>
+    
+    <div class="content">
+        <h2>📁 项目文件夹位置</h2>
+        <div class="url-box">
+            /home/node/clawd/skills/systematic-literature-review/MAdCAM-1-E-Cadherin-Dual-Blockade-01/
+        </div>
+        
+        <h2>🔗 直接访问链接</h2>
+        
+        <h3>主要文件：</h3>
+        <ul class="file-list">
+            <li>
+                <div class="file-name">综述文档 (LaTeX)</div>
+                <div class="url-box" id="reviewLink">生成中...</div>
+                <div class="file-desc">完整的11章节综述文档，可直接编译为PDF</div>
+                <a href="#" class="btn" onclick="copyLink('reviewLink')">复制链接</a>
+            </li>
+            <li>
+                <div class="file-name">项目总结报告</div>
+                <div class="url-box" id="summaryLink">生成中...</div>
+                <div class="file-desc">完整的项目总结，包含处理流程和学术贡献</div>
+                <a href="#" class="btn" onclick="copyLink('summaryLink')">复制链接</a>
+            </li>
+            <li>
+                <div class="file-name">参考文献库</div>
+                <div class="url-box" id="refLink">生成中...</div>
+                <div class="file-desc">BibTeX格式参考文献，包含10篇核心文献</div>
+                <a href="#" class="btn" onclick="copyLink('refLink')">复制链接</a>
+            </li>
+        </ul>
+        
+        <h3>其他重要文件：</h3>
+        <ul class="file-list">
+            <li>
+                <div class="file-name">技术详细报告</div>
+                <div class="url-box" id="reportLink">生成中...</div>
+                <div class="file-desc">JSON格式的详细技术报告</div>
+            </li>
+            <li>
+                <div class="file-name">写作进度报告</div>
+                <div class="url-box" id="writingLink">生成中...</div>
+                <div class="file-desc">章节写作的详细进度报告</div>
+            </li>
+            <li>
+                <div class="file-name">文献评分报告</div>
+                <div class="url-box" id="scoringLink">生成中...</div>
+                <div class="file-desc">文献相关性评分和分组报告</div>
+            </li>
+        </ul>
+        
+        <h2>📋 项目信息</h2>
+        <ul>
+            <li><strong>项目名称：</strong>MAdCAM-1-E-Cadherin-Dual-Blockade-01</li>
+            <li><strong>综述级别：</strong>Premium（旗舰级）</li>
+            <li><strong>处理文献：</strong>36篇（28篇高分）</li>
+            <li><strong>章节数量：</strong>11章</li>
+            <li><strong>完成时间：</strong>2026年2月4日</li>
+        </ul>
+        
+        <div style="text-align: center; margin: 30px 0;">
+            <button class="btn" onclick="showAllLinks()">显示所有链接</button>
+            <button class="btn" onclick="showFolderStructure()">查看文件夹结构</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2026 系统文献综述项目 | 基于 systematic-literature-review 技能生成</p>
+        <p>访问域名: openclaw.lazycat1012.heiyu.space</p>
+    </footer>
+    
+    <script>
+        // 基础URL
+        const baseUrl = 'https://openclaw.lazycat1012.heiyu.space/__openclaw__/canvas';
+        const projectPath = '/skills/systematic-literature-review/MAdCAM-1-E-Cadherin-Dual-Blockade-01';
+        
+        // 文件链接
+        const files = {
+            reviewLink: baseUrl + projectPath + '/review_final.tex',
+            summaryLink: baseUrl + projectPath + '/project_summary.md',
+            refLink: baseUrl + projectPath + '/references.bib',
+            reportLink: baseUrl + projectPath + '/final_report.json',
+            writingLink: baseUrl + projectPath + '/writing_summary.md',
+            scoringLink: baseUrl + projectPath + '/scoring_report.json'
+        };
+        
+        // 初始化显示链接
+        document.addEventListener('DOMContentLoaded', function() {
+            for (const [id, url] of Object.entries(files)) {
+                document.getElementById(id).textContent = url;
+            }
+        });
+        
+        function copyLink(elementId) {
+            const url = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(url).then(() => {
+                alert('链接已复制到剪贴板！\n\n' + url);
+            });
+        }
+        
+        function showAllLinks() {
+            let allLinks = '📋 所有文件访问链接：\n\n';
+            for (const [id, url] of Object.entries(files)) {
+                const fileName = id.replace('Link', '');
+                allLinks += `${fileName}:\n${url}\n\n`;
+            }
+            alert(allLinks);
+        }
+        
+        function showFolderStructure() {
+            const structure = `
+📁 项目文件夹结构：
+
+MAdCAM-1-E-Cadherin-Dual-Blockade-01/
+├── review_final.tex          # 完整综述文档
+├── references.bib            # 参考文献库
+├── project_summary.md        # 项目总结
+├── final_report.json         # 技术报告
+├── writing_summary.md        # 写作报告
+├── scoring_report.json       # 评分报告
+├── search_log.json           # 检索记录
+├── search_queries.json       # 检索策略
+├── deduplication_summary.md  # 去重报告
+├── writing_report.json       # 写作详细报告
+└── papers/                   # 文献数据
+    ├── initial_papers.jsonl
+    ├── deduplicated_papers.jsonl
+    └── scored_papers.jsonl
+
+💡 使用提示：
+1. 复制上述链接在浏览器中访问
+2. LaTeX文档可在Overleaf在线编译
+3. 所有文件都可通过链接直接查看
+            `.trim();
+            
+            alert(structure);
+        }
+        
+        // 自动打开主要文件
+        window.onload = function() {
+            console.log('项目访问页面已加载');
+            console.log('主要文件：' + files.reviewLink);
+        };
+    </script>
+</body>
+</html>

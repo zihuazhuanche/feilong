@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini Brain 技能 - 直接查看版</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            padding: 20px;
+            background: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #1a73e8;
+            border-bottom: 3px solid #1a73e8;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #4285f4;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #5f6368;
+        }
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #1a73e8;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .code {
+            background: #f1f3f4;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 15px 0;
+            border: 1px solid #dadce0;
+        }
+        .file-structure {
+            background: #202124;
+            color: #e8eaed;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+        }
+        .dir { color: #8ab4f8; }
+        .file { color: #34a853; }
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .config-item {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #dadce0;
+        }
+        .config-key {
+            font-weight: bold;
+            color: #1a73e8;
+        }
+        .config-value {
+            color: #5f6368;
+            font-family: 'Courier New', monospace;
+        }
+        .demo-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .demo-button {
+            background: #1a73e8;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .demo-button:hover {
+            background: #0d62d9;
+        }
+        .timestamp {
+            text-align: center;
+            margin-top: 30px;
+            color: #5f6368;
+            font-size: 0.9em;
+            border-top: 1px solid #dadce0;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Gemini Brain 技能详情</h1>
+        <p><strong>技能路径</strong>: <code>/home/node/clawd/skills/gemini-brain/</code></p>
+        
+        <h2>📁 文件结构</h2>
+        <div class="file-structure">
+            <div class="dir">skills/gemini-brain/</div>
+            <div class="file">├── SKILL.md              # 技能文档 (7.4KB)</div>
+            <div class="file">├── config.yaml           # 配置文件</div>
+            <div class="dir">├── scripts/</div>
+            <div class="file">│   ├── gemini_brain.py          # 核心模块 (10.5KB)</div>
+            <div class="file">│   └── openclaw_integration.py  # 集成模块 (9.9KB)</div>
+            <div class="dir">├── examples/</div>
+            <div class="file">├── install_and_test.sh   # 安装脚本</div>
+            <div class="file">├── quick_test.py         # 快速测试</div>
+            <div class="file">└── test_basic_functionality.py  # 功能测试</div>
+        </div>
+        
+        <h2>🎯 核心功能</h2>
+        <div class="card">
+            <h3>1. 🧠 智能问答</h3>
+            <p>使用 Google Gemini 进行深度思考和问题解答，支持上下文对话。</p>
+        </div>
+        <div class="card">
+            <h3>2. 🔍 实时搜索</h3>
+            <p>结合 Gemini 的搜索能力获取最新信息和网络资源。</p>
+        </div>
+        <div class="card">
+            <h3>3. 💻 代码生成</h3>
+            <p>支持 Python、JavaScript、Go、Rust 等多种编程语言的代码编写。</p>
+        </div>
+        <div class="card">
+            <h3>4. 📄 文档分析</h3>
+            <p>上传 PDF、Word、Excel 等文件让 Gemini 分析处理。</p>
+        </div>
+        <div class="card">
+            <h3>5. 🤔 决策支持</h3>
+            <p>复杂问题分析和多方案建议。</p>
+        </div>
+        
+        <h2>⚙️ 配置示例</h2>
+        <div class="config-grid">
+            <div class="config-item">
+                <div class="config-key">模型</div>
+                <div class="config-value">gemini-2.0-flash</div>
+            </div>
+            <div class="config-item">
+                <div class="config-key">温度</div>
+                <div class="config-value">0.7</div>
+            </div>
+            <div class="config-item">
+                <div class="config-key">最大输出</div>
+                <div class="config-value">2048 tokens</div>
+            </div>
+            <div class="config-item">
+                <div class="config-key">支持语言</div>
+                <div class="config-value">Python, JS, Go, Rust, Java, C++</div>
+            </div>
+            <div class="config-item">
+                <div class="config-key">搜索功能</div>
+                <div class="config-value">已启用</div>
+            </div>
+            <div class="config-item">
+                <div class="config-key">安全过滤</div>
+                <div class="config-value">已启用</div>
+            </div>
+        </div>
+        
+        <h2>🚀 使用示例</h2>
+        <div class="code">
+# 基础使用<br>
+openclaw skill gemini-brain "你的问题"<br><br>
+# 代码生成示例<br>
+openclaw skill gemini-brain "用Python写一个快速排序算法"<br><br>
+# 问题分析示例<br>
+openclaw skill gemini-brain "分析一下当前AI行业的发展趋势"
+        </div>
+        
+        <div class="code">
+# 高级功能<br>
+# 带上下文的对话<br>
+openclaw skill gemini-brain --context "之前的对话" "新的问题"<br><br>
+# 文件分析<br>
+openclaw skill gemini-brain --file document.pdf "总结这个文档"<br><br>
+# 代码审查<br>
+openclaw skill gemini-brain --code python "审查这段代码"
+        </div>
+        
+        <h2>📋 快速开始指南</h2>
+        <ol>
+            <li>获取 Google Gemini API 密钥</li>
+            <li>设置环境变量: <code>export GEMINI_API_KEY="your-api-key"</code></li>
+            <li>安装依赖: <code>pip install google-generativeai</code></li>
+            <li>运行测试: <code>python skills/gemini-brain/quick_test.py</code></li>
+            <li>开始使用 Gemini Brain 技能！</li>
+        </ol>
+        
+        <div class="demo-buttons">
+            <button class="demo-button" onclick="showCode()">查看核心代码</button>
+            <button class="demo-button" onclick="showConfig()">查看完整配置</button>
+            <button class="demo-button" onclick="showExamples()">查看使用示例</button>
+        </div>
+        
+        <div class="timestamp">
+            生成时间: 2026-02-16 08:37:00 UTC<br>
+            工作空间: /home/node/clawd<br>
+            状态: 技能已安装，等待 API 密钥配置
+        </div>
+    </div>
+
+    <script>
+        function showCode() {
+            alert('核心代码文件: skills/gemini-brain/scripts/gemini_brain.py\n文件大小: 10.5KB\n包含完整的 Gemini 集成逻辑');
+        }
+        
+        function showConfig() {
+            alert('完整配置文件: skills/gemini-brain/config.yaml\n包含模型配置、搜索设置、安全过滤等详细选项');
+        }
+        
+        function showExamples() {
+            alert('示例文件在 skills/gemini-brain/examples/ 目录中\n包含各种使用场景的示例代码');
+        }
+        
+        // 页面加载日志
+        console.log('Gemini Brain 技能详情页面已加载');
+        console.log('Canvas 访问问题已绕过，直接提供 HTML 内容');
+    </script>
+</body>
+</html>

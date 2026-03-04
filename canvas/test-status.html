@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 工作空间状态测试</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .status-card {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid #4CAF50;
+        }
+        .status-card.warning {
+            border-left-color: #FF9800;
+        }
+        .status-card.error {
+            border-left-color: #F44336;
+        }
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .status-item:last-child {
+            border-bottom: none;
+        }
+        .status-label {
+            font-weight: bold;
+            color: #E3F2FD;
+        }
+        .status-value {
+            font-family: 'Courier New', monospace;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .success {
+            color: #4CAF50;
+        }
+        .warning {
+            color: #FF9800;
+        }
+        .error {
+            color: #F44336;
+        }
+        .timestamp {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+        }
+        .access-link {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: rgba(76, 175, 80, 0.2);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .access-link:hover {
+            background: rgba(76, 175, 80, 0.4);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✅ OpenClaw 工作空间已建立</h1>
+        
+        <div class="status-card">
+            <div class="status-item">
+                <span class="status-label">工作空间目录</span>
+                <span class="status-value success">/home/node/clawd</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Canvas 目录</span>
+                <span class="status-value success">/home/node/clawd/canvas</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">技能数量</span>
+                <span class="status-value success">25+</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">运行环境</span>
+                <span class="status-value success">Docker 容器 (root)</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">当前时间</span>
+                <span class="status-value" id="current-time">加载中...</span>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h3>📁 目录结构</h3>
+            <div class="status-item">
+                <span class="status-label">AGENTS.md</span>
+                <span class="status-value success">✓ 存在</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">SOUL.md</span>
+                <span class="status-value success">✓ 存在</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">USER.md</span>
+                <span class="status-value success">✓ 存在</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">TOOLS.md</span>
+                <span class="status-value success">✓ 存在</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">HEARTBEAT.md</span>
+                <span class="status-value success">✓ 存在</span>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <h3>🔧 可用技能</h3>
+            <div class="status-item">
+                <span class="status-label">系统文献综述</span>
+                <span class="status-value success">systematic-literature-review</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">NSFC 标书写作</span>
+                <span class="status-value success">nsfc-* 系列技能</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">LaTeX 模板迁移</span>
+                <span class="status-value success">migrating-latex-templates</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">项目测试</span>
+                <span class="status-value success">auto-test-project/skill</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">Git 管理</span>
+                <span class="status-value success">git-commit/publish-release</span>
+            </div>
+        </div>
+
+        <a href="https://openclaw.lazycat1012.heiyu.space/__openclaw__/canvas/" class="access-link" target="_blank">
+            🌐 访问 Canvas 文件列表
+        </a>
+
+        <div class="timestamp">
+            最后更新: <span id="update-time">2026-02-16 07:48:37 UTC</span>
+        </div>
+    </div>
+
+    <script>
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            document.getElementById('current-time').textContent = timeStr;
+        }
+        
+        // 初始更新
+        updateTime();
+        // 每秒更新一次
+        setInterval(updateTime, 1000);
+        
+        // 添加页面访问统计（可选）
+        console.log('OpenClaw 工作空间状态页面已加载');
+        console.log('访问链接:', window.location.href);
+    </script>
+</body>
+</html>

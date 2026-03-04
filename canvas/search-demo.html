@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 搜索功能演示</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 40px;
+            font-size: 1.2em;
+        }
+        .search-section {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        .search-method {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            border-left: 4px solid;
+        }
+        .method-api { border-left-color: #F44336; }
+        .method-no-api { border-left-color: #4CAF50; }
+        .method-status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .status-ok { background: #4CAF50; }
+        .status-needs-api { background: #FF9800; }
+        .status-error { background: #F44336; }
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 15px 0;
+            overflow-x: auto;
+            border-left: 4px solid #FBBC05;
+        }
+        .demo-area {
+            background: rgba(0, 0, 0, 0.25);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        .demo-result {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .feature-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .feature-item h3 {
+            margin-top: 0;
+            color: #8AB4F8;
+        }
+        .timestamp {
+            text-align: center;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9em;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-search"></i> OpenClaw 搜索功能演示</h1>
+        <div class="subtitle">测试各种搜索方法的可用性和功能</div>
+        
+        <div class="search-section">
+            <h2>🔍 搜索方法对比</h2>
+            
+            <div class="search-method method-api">
+                <h3>1. Gemini Brain 技能 <span class="method-status status-needs-api">需要API密钥</span></h3>
+                <p><strong>功能</strong>: 智能问答 + 搜索增强 + 代码生成 + 文档分析</p>
+                <p><strong>需求</strong>: Google Gemini API 密钥</p>
+                <p><strong>状态</strong>: 技能已安装，等待API密钥配置</p>
+                <div class="code-block">
+# 使用示例（需要API密钥）<br>
+openclaw skill gemini-brain "你的问题"<br>
+openclaw skill gemini-brain --search "搜索内容"
+                </div>
+            </div>
+            
+            <div class="search-method method-api">
+                <h3>2. web_search 工具 <span class="method-status status-needs-api">需要API密钥</span></h3>
+                <p><strong>功能</strong>: 网页搜索（使用Brave Search API）</p>
+                <p><strong>需求</strong>: Brave Search API 密钥</p>
+                <p><strong>状态</strong>: 需要配置API密钥</p>
+                <div class="code-block">
+# 错误信息示例<br>
+{"error": "missing_brave_api_key",<br>
+ "message": "web_search needs a Brave Search API key..."}
+                </div>
+            </div>
+            
+            <div class="search-method method-no-api">
+                <h3>3. web_fetch 工具 <span class="method-status status-ok">✅ 无需API</span></h3>
+                <p><strong>功能</strong>: 获取特定URL的网页内容</p>
+                <p><strong>需求</strong>: 无需API密钥</p>
+                <p><strong>状态</strong>: ✅ 正常工作</p>
+                <div class="code-block">
+# 使用示例<br>
+web_fetch("https://example.com")<br>
+web_fetch("https://httpbin.org/html", maxChars=500)
+                </div>
+            </div>
+            
+            <div class="search-method method-no-api">
+                <h3>4. browser 工具 <span class="method-status status-ok">✅ 无需API</span></h3>
+                <p><strong>功能</strong>: 控制浏览器访问网站</p>
+                <p><strong>需求</strong>: 无需API密钥，需要浏览器扩展</p>
+                <p><strong>状态</strong>: ✅ 可用（需要配置）</p>
+                <div class="code-block">
+# 使用示例<br>
+browser(action="open", targetUrl="https://example.com")<br>
+browser(action="snapshot", targetUrl="https://google.com")
+                </div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <h2>🎯 实际测试结果</h2>
+            <div class="demo-area">
+                <h3>web_fetch 测试成功</h3>
+                <div class="demo-result">
+                    <p><strong>测试URL</strong>: https://httpbin.org/html</p>
+                    <p><strong>状态</strong>: 200 OK</p>
+                    <p><strong>内容类型</strong>: text/html</p>
+                    <p><strong>获取时间</strong>: 1109ms</p>
+                    <p><strong>内容示例</strong>: "Herman Melville - Moby-Dick..."</p>
+                </div>
+                
+                <h3>当前可用的无API搜索方案</h3>
+                <div class="feature-grid">
+                    <div class="feature-item">
+                        <h3><i class="fas fa-globe"></i> 直接URL访问</h3>
+                        <p>使用 web_fetch 获取已知URL的内容</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-browser"></i> 浏览器控制</h3>
+                        <p>使用 browser 工具访问和截图</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><i class="fas fa-file-alt"></i> 本地搜索</h3>
+                        <p>搜索工作空间内的文件和内容</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <h2>🚀 推荐的工作流程</h2>
+            <div class="demo-area">
+                <h3>方案A: 配置API密钥（完整功能）</h3>
+                <ol>
+                    <li>获取 Gemini API 密钥（用于智能搜索）</li>
+                    <li>获取 Brave Search API 密钥（用于网页搜索）</li>
+                    <li>配置环境变量或配置文件</li>
+                    <li>享受完整的搜索功能</li>
+                </ol>
+                
+                <h3>方案B: 无API工作流程（当前状态）</h3>
+                <ol>
+                    <li>使用 web_fetch 获取特定网站内容</li>
+                    <li>使用 browser 工具进行可视化搜索</li>
+                    <li>结合本地知识库和文件搜索</li>
+                    <li>手动收集信息后进行分析</li>
+                </ol>
+                
+                <h3>方案C: 混合模式</h3>
+                <ol>
+                    <li>对已知信息源使用 web_fetch</li>
+                    <li>对需要交互的网站使用 browser</li>
+                    <li>对复杂分析使用本地AI模型（如当前使用的deepseek）</li>
+                    <li>逐步添加API功能</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="timestamp">
+            测试时间: 2026-02-16 08:56:00 UTC<br>
+            工作空间: /home/node/clawd<br>
+            Canvas访问: ✅ 正常<br>
+            搜索状态: web_fetch ✅ | web_search ❌ | Gemini Brain ❌<br>
+            访问链接: https://openclaw.lazycat1012.heiyu.space/__openclaw__/canvas/search-demo.html
+        </div>
+    </div>
+
+    <script>
+        // 页面加载日志
+        console.log('搜索功能演示页面已加载');
+        console.log('Canvas访问状态: 正常');
+        console.log('当前可用搜索: web_fetch (无API)');
+        
+        // 更新时间显示
+        function updateTime() {
+            const now = new Date();
+            const timeStr = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            const timeElement = document.querySelector('.timestamp');
+            if (timeElement) {
+                const lines = timeElement.innerHTML.split('<br>');
+                lines[0] = '测试时间: ' + timeStr;
+                timeElement.innerHTML = lines.join('<br>');
+            }
+        }
+        
+        // 初始更新
+        updateTime();
+        // 每分钟更新一次
+        setInterval(updateTime, 60000);
+    </script>
+</body>
+</html>

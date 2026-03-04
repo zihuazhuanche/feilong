@@ -1,0 +1,17 @@
+{
+  "status": "installing",
+  "message": "正在安装LaTeX中文支持包...",
+  "progress": 75,
+  "word_count": 11653,
+  "target_words": 11600,
+  "excess_words": 53,
+  "chapters": 24,
+  "references": 36,
+  "files": {
+    "tex": "/home/node/clawd/skills/systematic-literature-review/MAdCAM-1-E-Cadherin-Dual-Blockade-01/review_complete_11600.tex",
+    "bib": "/home/node/clawd/skills/systematic-literature-review/MAdCAM-1-E-Cadherin-Dual-Blockade-01/references.bib",
+    "pdf": "pending"
+  },
+  "estimated_time": "5-10分钟",
+  "last_updated": "2026-02-05T03:35:00Z"
+}

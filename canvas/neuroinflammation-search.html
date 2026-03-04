@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>神经炎症相关文献搜索 - MAdCAM-1 & E-cadherin</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #f0f0f0;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        .search-query {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid #3498db;
+        }
+        .molecules {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+        .molecule-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s;
+        }
+        .molecule-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .molecule-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .molecule-icon {
+            font-size: 2em;
+            color: #3498db;
+        }
+        .search-results {
+            background: #e8f4fc;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        .paper-item {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #2ecc71;
+        }
+        .search-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+        .search-link {
+            display: block;
+            background: #3498db;
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .search-link:hover {
+            background: #2980b9;
+            transform: translateY(-3px);
+        }
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .timestamp {
+            color: #7f8c8d;
+            font-size: 14px;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 神经炎症相关文献搜索</h1>
+            <p>MAdCAM-1 & E-cadherin 与脑出血、卒中关系的最新研究</p>
+        </div>
+
+        <div class="search-query">
+            <h2>📋 搜索主题</h2>
+            <p><strong>目标分子:</strong> MAdCAM-1 (黏膜地址素细胞黏附分子-1) 和 E-cadherin (上皮钙黏蛋白)</p>
+            <p><strong>疾病关联:</strong> 神经炎症、脑出血、卒中</p>
+            <p><strong>时间范围:</strong> 最新研究 (2023-2025)</p>
+            <p><strong>数据库:</strong> PubMed、arXiv、Google Scholar</p>
+        </div>
+
+        <h2>🧬 目标分子信息</h2>
+        <div class="molecules">
+            <div class="molecule-card">
+                <div class="molecule-header">
+                    <div class="molecule-icon">🔬</div>
+                    <div>
+                        <h3>MAdCAM-1</h3>
+                        <p>Mucosal Addressin Cell Adhesion Molecule-1</p>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>功能:</strong> 淋巴细胞归巢到黏膜组织的黏附分子</li>
+                    <li><strong>在神经炎症中的作用:</strong> 可能参与血脑屏障破坏和免疫细胞浸润</li>
+                    <li><strong>与卒中的关联:</strong> 炎症反应中的关键调节因子</li>
+                    <li><strong>研究热点:</strong> 作为治疗靶点的潜力</li>
+                </ul>
+            </div>
+            
+            <div class="molecule-card">
+                <div class="molecule-header">
+                    <div class="molecule-icon">🧪</div>
+                    <div>
+                        <h3>E-cadherin</h3>
+                        <p>Epithelial Cadherin</p>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>功能:</strong> 细胞间黏附分子，维持上皮完整性</li>
+                    <li><strong>在神经炎症中的作用:</strong> 血脑屏障完整性的关键蛋白</li>
+                    <li><strong>与脑出血的关联:</strong> 屏障破坏导致出血和炎症</li>
+                    <li><strong>研究热点:</strong> 作为神经保护的治疗靶点</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="search-results">
+            <h2>🔍 搜索状态</h2>
+            <p><strong>arXiv 搜索结果:</strong> 未找到直接相关的预印本论文</p>
+            <p><strong>可能原因:</strong></p>
+            <ol>
+                <li>这些主题的研究可能更多发表在传统期刊上</li>
+                <li>arXiv 主要收录物理、数学、计算机科学等领域的预印本</li>
+                <li>生物医学研究更多在 PubMed、ScienceDirect 等平台</li>
+            </ol>
+            
+            <div class="paper-item">
+                <h3>📄 建议的搜索策略</h3>
+                <p><strong>PubMed 搜索关键词:</strong></p>
+                <div class="code-block">
+("MAdCAM-1" OR "MAdCAM1" OR "mucosal addressin cell adhesion molecule-1") 
+AND 
+("neuroinflammation" OR "intracerebral hemorrhage" OR "stroke" OR "cerebral hemorrhage")
+
+("E-cadherin" OR "CDH1" OR "epithelial cadherin") 
+AND 
+("blood-brain barrier" OR "neuroinflammation" OR "stroke" OR "hemorrhage")
+                </div>
+            </div>
+        </div>
+
+        <h2>🔗 直接搜索链接</h2>
+        <div class="search-links">
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=(MAdCAM-1+OR+MAdCAM1)+AND+(neuroinflammation+OR+stroke+OR+intracerebral+hemorrhage)" class="search-link" target="_blank">
+                🔍 PubMed: MAdCAM-1 搜索
+            </a>
+            
+            <a href="https://pubmed.ncbi.nlm.nih.gov/?term=(E-cadherin+OR+CDH1)+AND+(neuroinflammation+OR+stroke+OR+blood-brain+barrier)" class="search-link" target="_blank">
+                🔍 PubMed: E-cadherin 搜索
+            </a>
+            
+            <a href="https://scholar.google.com/scholar?q=MAdCAM-1+neuroinflammation+stroke+2024" class="search-link" target="_blank">
+                📚 Google Scholar 搜索
+            </a>
+            
+            <a href="https://www.sciencedirect.com/search?qs=MAdCAM-1%20neuroinflammation" class="search-link" target="_blank">
+                📖 ScienceDirect 搜索
+            </a>
+        </div>
+
+        <h2>📋 手动搜索建议</h2>
+        <div class="code-block">
+# 建议的文献搜索关键词组合：
+
+1. 基础搜索：
+   - "MAdCAM-1 neuroinflammation"
+   - "E-cadherin blood-brain barrier stroke"
+   - "adhesion molecules intracerebral hemorrhage"
+
+2. 高级搜索：
+   - "MAdCAM-1 AND microglia AND stroke"
+   - "E-cadherin disruption AND neuroinflammation"
+   - "cell adhesion molecules AND cerebral hemorrhage"
+
+3. 最新研究 (2023-2025)：
+   - "MAdCAM-1 2024 stroke"
+   - "E-cadherin 2023 neuroinflammation"
+   - "recent advances adhesion molecules stroke"
+
+4. 综述文章：
+   - "review MAdCAM-1 neuroinflammation"
+   - "E-cadherin in neurological disorders review"
+   - "adhesion molecules in stroke pathogenesis"
+        </div>
+
+        <div class="search-results">
+            <h2>🎯 预期研究方向</h2>
+            <p>基于分子功能，可能的研究方向包括：</p>
+            
+            <div class="paper-item">
+                <h4>1. MAdCAM-1 在卒中后神经炎症中的作用</h4>
+                <p>• 调节免疫细胞浸润血脑屏障的机制</p>
+                <p>• 作为炎症生物标志物的潜力</p>
+                <p>• 靶向治疗的可能性</p>
+            </div>
+            
+            <div class="paper-item">
+                <h4>2. E-cadherin 与血脑屏障完整性</h4>
+                <p>• 在脑出血中的表达变化</p>
+                <p>• 屏障破坏的分子机制</p>
+                <p>• 神经保护策略</p>
+            </div>
+            
+            <div class="paper-item">
+                <h4>3. 分子相互作用网络</h4>
+                <p>• MAdCAM-1 和 E-cadherin 的协同作用</p>
+                <p>• 信号通路交叉对话</p>
+                <p>• 多靶点治疗策略</p>
+            </div>
+        </div>
+
+        <div class="timestamp">
+            搜索页面生成时间: 2026-02-04 10:51 UTC<br>
+            搜索主题: MAdCAM-1 & E-cadherin 与神经炎症、脑出血、卒中<br>
+            搜索状态: arXiv 无直接结果，建议使用 PubMed/Google Scholar<br>
+            建议: 使用提供的链接直接访问学术数据库
+        </div>
+    </div>
+
+    <script>
+        // 添加搜索链接交互
+        document.querySelectorAll('.search-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const platform = this.textContent.split(':')[0];
+                alert(`将在新标签页打开 ${platform} 搜索页面\n\n搜索关键词已预填充，可直接查看结果。`);
+            });
+        });
+
+        // 显示搜索提示
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchBox = document.querySelector('.search-query');
+            searchBox.addEventListener('click', function() {
+                alert('搜索提示：\n\n1. 使用 PubMed 获取最权威的医学文献\n2. Google Scholar 覆盖范围最广\n3. 关注 2023-2025 年的最新研究\n4. 查看高被引综述了解研究现状');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 浏览器演示</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            max-width: 800px;
+            width: 100%;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .status-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid;
+        }
+        
+        .status-card.success {
+            border-left-color: #10b981;
+        }
+        
+        .status-card.warning {
+            border-left-color: #f59e0b;
+        }
+        
+        .status-card.info {
+            border-left-color: #3b82f6;
+        }
+        
+        .status-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            color: #1e293b;
+        }
+        
+        .status-card p {
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .features {
+            background: #f1f5f9;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .features h2 {
+            color: #1e293b;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+        
+        .feature-list {
+            list-style: none;
+        }
+        
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: #10b981;
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+        
+        .timestamp {
+            background: #e0f2fe;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 20px;
+            font-family: monospace;
+            text-align: center;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                border-radius: 10px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OpenClaw 浏览器演示</h1>
+            <p>语音识别与TTS功能配置完成</p>
+        </div>
+        
+        <div class="content">
+            <div class="status-grid">
+                <div class="status-card success">
+                    <h3>✅ 语音识别</h3>
+                    <p>使用 speech_recognition + Google API<br>支持中文语音转文字</p>
+                </div>
+                
+                <div class="status-card success">
+                    <h3>✅ TTS 语音合成</h3>
+                    <p>文字转语音功能<br>支持中文语音回复</p>
+                </div>
+                
+                <div class="status-card success">
+                    <h3>✅ Discord 集成</h3>
+                    <p>消息发送功能正常<br>支持文本和语音消息</p>
+                </div>
+                
+                <div class="status-card info">
+                    <h3>🌐 浏览器渲染</h3>
+                    <p>Chromium 144.0.7559.109<br>运行在 Debian GNU/Linux 12</p>
+                </div>
+            </div>
+            
+            <div class="features">
+                <h2>已配置的功能</h2>
+                <ul class="feature-list">
+                    <li>中文语音识别 (speech_recognition)</li>
+                    <li>文字转语音 TTS 功能</li>
+                    <li>Discord 消息发送与接收</li>
+                    <li>音频格式转换 (ffmpeg)</li>
+                    <li>浏览器页面渲染与截图</li>
+                    <li>实时语音对话通道</li>
+                </ul>
+            </div>
+            
+            <div class="timestamp">
+                页面生成时间: <span id="current-time">2026-02-16 00:45:00 UTC</span>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>OpenClaw AI Assistant • 工作目录: /home/node/clawd</p>
+        </div>
+    </div>
+    
+    <script>
+        // 更新当前时间
+        function updateTime() {
+            const now = new Date();
+            const utcTime = now.toISOString().replace('T', ' ').substring(0, 19) + ' UTC';
+            document.getElementById('current-time').textContent = utcTime;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+        
+        // 添加一些交互效果
+        document.querySelectorAll('.status-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+                card.style.transition = 'transform 0.3s ease';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body>
+</html>

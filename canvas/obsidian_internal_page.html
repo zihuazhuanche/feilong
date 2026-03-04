@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title data-i18n="templates.login.title">登录懒猫微服</title>
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzYuNjA1IiBoZWlnaHQ9Ijg4LjIiIHZpZXdCb3g9IjAgMCA3Ni42MDUgODguMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgY3g9Ii02Ljc3MiUiIGN5PSItMjMuMTQ2JSIgZng9Ii02Ljc3MiUiIGZ5PSItMjMuMTQ2JSIgcj0iMTgwLjExOSUiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLjQ3NDgzIC41NzQxNiAtLjg4MDA4IC4zMDk3OCAtLjI0IC0uMTIpIiBpZD0iYSI+PHN0b3Agc3RvcC1jb2xvcj0iI0U4RTMwMCIgb2Zmc2V0PSIwJSIvPjxzdG9wIHN0b3AtY29sb3I9IiMwMDlGRDMiIG9mZnNldD0iMTAwJSIvPjwvcmFkaWFsR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IHgxPSI1MCUiIHkxPSIwJSIgeDI9Ijc4LjE4OSUiIHkyPSIxMDAlIiBpZD0iYiI+PHN0b3Agc3RvcC1jb2xvcj0iI0ZGQzU0RiIgb2Zmc2V0PSIwJSIvPjxzdG9wIHN0b3AtY29sb3I9IiNGRjNEODAiIG9mZnNldD0iMzQuNTE1JSIvPjxzdG9wIHN0b3AtY29sb3I9IiM3NDRGRkUiIG9mZnNldD0iNzAuNTg0JSIvPjxzdG9wIHN0b3AtY29sb3I9IiMwMDNEQkQiIG9mZnNldD0iMTAwJSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTE5LjQ1IDE0LjA0N3Y1Mi4wNzdhMi42MyAyLjYzIDAgMCAwIDIuNjI5IDIuNjNoNy41MjdhNDIuMDkgNDIuMDkgMCAwIDAgNy43ODMgMTAuNzMgNDIuMDU0IDQyLjA1NCAwIDAgMCAxMi43IDguNzE2SDUuMjZBNS4yNTkgNS4yNTkgMCAwIDEgMCA4Mi45NDFWMTYuNjc2YTUuMjU5IDUuMjU5IDAgMCAxIDUuMjU5LTUuMjU5aDExLjU2YTIuNjMgMi42MyAwIDAgMSAyLjYzIDIuNjN6IiBmaWxsPSJ1cmwoI2EpIi8+PHBhdGggZD0iTTQyLjY5MyAwTDU2Ljc2IDEzLjAxMmEzOC4yNDcgMzguMjQ3IDAgMCAxIDEwLjMwOS0xLjQwN2guMTI5YzEuMzM4LjAwNyAyLjkyMy4xMTcgNC43NTQuMzI5YTUuMjU5IDUuMjU5IDAgMCAxIDQuNjUzIDUuMjI0djguNjM1YTUuMjU5IDUuMjU5IDAgMCAxLTUuMjU5IDUuMjU5SDY3LjA3Yy0xMC4zNiAwLTE4Ljc2IDguMzk4LTE4Ljc2IDE4Ljc1NyAwIDEwLjI1NSA4LjIzMiAxOC41ODggMTguNDUgMTguNzU0bC4zMS4wMDJoNC4yNzdhNS4yNTkgNS4yNTkgMCAwIDEgNS4yNTggNS4xNzJsLjAwMS4wODd2OC45MjlhNS4yNTkgNS4yNTkgMCAwIDEtNS4yNTkgNS4yNTlINjcuMDdjLTIxLjEwMiAwLTM4LjIwOS0xNy4xMDQtMzguMjA5LTM4LjIwM2EzOC4wMiAzOC4wMiAwIDAgMSA1Ljk2Mi0yMC41MDJDMzEuNjA3IDE1Ljc4NCAzNC41MjcgNi4xNDMgNDIuNjM3IDBoLjA1NnoiIGZpbGw9InVybCgjYikiLz48cGF0aCBkPSJNNjQuMTgzIDM5LjA4MmE3LjU5MSA3LjU5MSAwIDEgMSAwIDE1LjE4IDcuNTkxIDcuNTkxIDAgMCAxLTcuMTk3LTEwLjAxMiAyLjY5OCAyLjY5OCAwIDEgMCAzLjI1NS00LjA2NiA3LjU1NSA3LjU1NSAwIDAgMSAzLjk0Mi0xLjEwMnoiIGZpbGw9IiMwMDU2QzMiLz48L2c+PC9zdmc+">
+    <style lang="css" type="text/css">
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .app {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 520px;
+            margin: auto;
+        }
+
+        .app .head {
+            padding-top: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            align-items: center;
+            height: 220px;
+        }
+
+        .app .head .logo {
+            width: 85px;
+            height: 85px;
+            padding: 20px;
+        }
+
+        .app .head .title {
+            text-align: center;
+            color: #333;
+            font-size: 20px;
+            line-height: 28px;
+            font-weight: 600;
+            margin: 0;
+            margin-top: 1rem;
+        }
+
+        .app .container {
+            flex: 1;
+            padding: 16px;
+        }
+
+        .app .footer {
+            text-align: center;
+            padding-bottom: 20px;
+        }
+
+        .app .container .form {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+
+        }
+
+        .l_input {
+            display: flex;
+            flex-direction: row;
+            position: relative;
+        }
+
+        .l_input input:focus-visible {
+            outline: none;
+        }
+
+        .l_input input::-webkit-input-placeholder {
+            color: #c5c6c7;
+        }
+
+        .l_input input {
+            width: 100%;
+            color: #333333;
+            font-size: 16px;
+            font-weight: 300;
+            caret-color: #2ec1cc;
+            border-radius: 100px;
+            border: 1px #ebeced solid;
+            padding: 12px 20px;
+            -webkit-appearance: none;
+        }
+
+        .app .login {
+            outline: none;
+        }
+
+        .button {
+            outline: none;
+            width: 100%;
+            border-radius: 22px;
+            border-width: 0;
+            border: 1px solid transparent;
+            padding: 0.6em 1.2em;
+            font-size: 1em;
+            font-weight: 500;
+            font-family: inherit;
+            font-weight: 400;
+            line-height: 22px;
+            font-size: 16px;
+            background-color: rgba(46, 193, 204, 1);
+            color: #fff;
+            text-align: center;
+        }
+
+        .button:active {
+            background-color: rgba(46, 193, 204, 0.6);
+        }
+
+        .button:disabled {
+            background-color: rgba(46, 193, 204, 0.4);
+        }
+
+        .app .footer a {
+            color: #879091;
+            display: inline;
+            text-decoration: inherit;
+            font-size: 0.8rem;
+        }
+    </style>
+    <meta name="i18n-languages-path" content="https://lazycat1012.heiyu.space/sys/static" />
+    <script src="https://lazycat1012.heiyu.space/sys/static/js/i18next.min.js"></script>
+    <script src="https://lazycat1012.heiyu.space/sys/static/js/i18next-hb.min.js"></script>
+    <script src="https://lazycat1012.heiyu.space/sys/static/js/i18next-bld.min.js"></script>
+    <script src="https://lazycat1012.heiyu.space/sys/static/js/loc-i18next.min.js"></script>
+</head>
+
+<body>
+    <div class="app" style="visibility: hidden;">
+        <div class="head">
+            <img class="logo"
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNzYuNjA1IiBoZWlnaHQ9Ijg4LjIiIHZpZXdCb3g9IjAgMCA3Ni42MDUgODguMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cmFkaWFsR3JhZGllbnQgY3g9Ii02Ljc3MiUiIGN5PSItMjMuMTQ2JSIgZng9Ii02Ljc3MiUiIGZ5PSItMjMuMTQ2JSIgcj0iMTgwLjExOSUiIGdyYWRpZW50VHJhbnNmb3JtPSJtYXRyaXgoLjQ3NDgzIC41NzQxNiAtLjg4MDA4IC4zMDk3OCAtLjI0IC0uMTIpIiBpZD0iYSI+PHN0b3Agc3RvcC1jb2xvcj0iI0U4RTMwMCIgb2Zmc2V0PSIwJSIvPjxzdG9wIHN0b3AtY29sb3I9IiMwMDlGRDMiIG9mZnNldD0iMTAwJSIvPjwvcmFkaWFsR3JhZGllbnQ+PGxpbmVhckdyYWRpZW50IHgxPSI1MCUiIHkxPSIwJSIgeDI9Ijc4LjE4OSUiIHkyPSIxMDAlIiBpZD0iYiI+PHN0b3Agc3RvcC1jb2xvcj0iI0ZGQzU0RiIgb2Zmc2V0PSIwJSIvPjxzdG9wIHN0b3AtY29sb3I9IiNGRjNEODAiIG9mZnNldD0iMzQuNTE1JSIvPjxzdG9wIHN0b3AtY29sb3I9IiM3NDRGRkUiIG9mZnNldD0iNzAuNTg0JSIvPjxzdG9wIHN0b3AtY29sb3I9IiMwMDNEQkQiIG9mZnNldD0iMTAwJSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxnIGZpbGwtcnVsZT0ibm9uemVybyIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTE5LjQ1IDE0LjA0N3Y1Mi4wNzdhMi42MyAyLjYzIDAgMCAwIDIuNjI5IDIuNjNoNy41MjdhNDIuMDkgNDIuMDkgMCAwIDAgNy43ODMgMTAuNzMgNDIuMDU0IDQyLjA1NCAwIDAgMCAxMi43IDguNzE2SDUuMjZBNS4yNTkgNS4yNTkgMCAwIDEgMCA4Mi45NDFWMTYuNjc2YTUuMjU5IDUuMjU5IDAgMCAxIDUuMjU5LTUuMjU5aDExLjU2YTIuNjMgMi42MyAwIDAgMSAyLjYzIDIuNjN6IiBmaWxsPSJ1cmwoI2EpIi8+PHBhdGggZD0iTTQyLjY5MyAwTDU2Ljc2IDEzLjAxMmEzOC4yNDcgMzguMjQ3IDAgMCAxIDEwLjMwOS0xLjQwN2guMTI5YzEuMzM4LjAwNyAyLjkyMy4xMTcgNC43NTQuMzI5YTUuMjU5IDUuMjU5IDAgMCAxIDQuNjUzIDUuMjI0djguNjM1YTUuMjU5IDUuMjU5IDAgMCAxLTUuMjU5IDUuMjU5SDY3LjA3Yy0xMC4zNiAwLTE4Ljc2IDguMzk4LTE4Ljc2IDE4Ljc1NyAwIDEwLjI1NSA4LjIzMiAxOC41ODggMTguNDUgMTguNzU0bC4zMS4wMDJoNC4yNzdhNS4yNTkgNS4yNTkgMCAwIDEgNS4yNTggNS4xNzJsLjAwMS4wODd2OC45MjlhNS4yNTkgNS4yNTkgMCAwIDEtNS4yNTkgNS4yNTlINjcuMDdjLTIxLjEwMiAwLTM4LjIwOS0xNy4xMDQtMzguMjA5LTM4LjIwM2EzOC4wMiAzOC4wMiAwIDAgMSA1Ljk2Mi0yMC41MDJDMzEuNjA3IDE1Ljc4NCAzNC41MjcgNi4xNDMgNDIuNjM3IDBoLjA1NnoiIGZpbGw9InVybCgjYikiLz48cGF0aCBkPSJNNjQuMTgzIDM5LjA4MmE3LjU5MSA3LjU5MSAwIDEgMSAwIDE1LjE4IDcuNTkxIDcuNTkxIDAgMCAxLTcuMTk3LTEwLjAxMiAyLjY5OCAyLjY5OCAwIDEgMCAzLjI1NS00LjA2NiA3LjU1NSA3LjU1NSAwIDAgMSAzLjk0Mi0xLjEwMnoiIGZpbGw9IiMwMDU2QzMiLz48L2c+PC9zdmc+" />
+            <p class="title" data-i18n="templates.login.subtitle">登录账户</p>
+        </div>
+        <div class="container">
+            <form class="form" method="post" action="/sys/login?redirect=https%3a%2f%2fobsidian.lazycat1012.heiyu.space%2f" oninput="checkInput()">
+                <div class="l_input">
+                    <input id="username" class="disabled:bg-transparent" placeholder="请输入用户名"
+                        data-i18n="[placeholder]templates.login.form_username" type="text" name="username" />
+                </div>
+                <div class="l_input">
+                    <input id="password" class="disabled:bg-transparent" placeholder="请输入密码"
+                        data-i18n="[placeholder]templates.login.form_password" type="password" name="password" />
+                </div>
+                <button id="submit" class="button login" data-i18n="templates.login.button_submit" type="Submit"
+                    value="Login" disabled>登录</button>
+            </form>
+        </div>
+        <div class="footer">
+            <a href="//lazycat.cloud/?source=boxlogin" data-i18n="templates.login.button_helper"
+                target="_blank">登录遇到问题？需要帮助</a>
+        </div>
+    </div>
+    <script src="https://lazycat1012.heiyu.space/sys/static/js/i18next-init.js"></script>
+    <script type="text/javascript">
+        
+        const _oldOnreadystatechange = document.onreadystatechange
+        let _pageloadTask = -1
+        document.onreadystatechange = function (e) {
+            _oldOnreadystatechange && _oldOnreadystatechange.call(e)
+            const showPage = () => {
+                
+                const app = document.querySelector(".app")
+                if (app) {
+                    app.style.visibility = ''
+                }
+            }
+
+            
+            const clearPageloadTask = () => {
+                if (_pageloadTask != -1) {
+                    clearTimeout(_pageloadTask)
+                    _pageloadTask = -1
+                }
+            }
+            clearPageloadTask()
+            _pageloadTask = setTimeout(function () {
+                clearPageloadTask()
+                showPage()
+            }, 400)
+
+            if (document.readyState === 'complete') {
+                if (window.i18next) {
+                    
+                    if (window.i18next.isInitialized) {
+                        showPage()
+                        clearPageloadTask()
+                    }
+                } else {
+                    
+                    showPage()
+                    clearPageloadTask()
+                }
+            }
+        }
+
+        
+        function checkInput() {
+            const mUsername = document.querySelector('#username');
+            const mPassword = document.querySelector('#password');
+            const mSubmit = document.querySelector('#submit');
+            if (!mUsername.value || !mPassword.value) {
+                document.querySelector('#submit').disabled = true;
+            } else {
+                document.querySelector('#submit').disabled = false;
+            }
+        }
+    </script>
+</body>
+
+</html>

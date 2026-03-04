@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浏览器扩展连接状态</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .status { padding: 20px; margin: 10px 0; border-radius: 5px; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .warning { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .screenshot { max-width: 100%; border: 1px solid #ddd; margin: 10px 0; }
+        pre { background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>🦞 浏览器扩展连接状态</h1>
+    
+    <div class="status success">
+        <h2>✅ 无头浏览器状态</h2>
+        <p><strong>状态：</strong>已安装并测试成功</p>
+        <p><strong>测试截图：</strong></p>
+        <img src="/__openclaw__/canvas/browser_test_screenshot.png" alt="无头浏览器测试截图" class="screenshot">
+        <p><strong>文件路径：</strong> /home/node/clawd/browser_test_screenshot.png</p>
+    </div>
+    
+    <div class="status warning">
+        <h2>⚠️ Chrome扩展状态</h2>
+        <p><strong>状态：</strong>需要手动连接</p>
+        <p>Chrome浏览器服务正在运行，但扩展未连接。</p>
+        
+        <h3>连接步骤：</h3>
+        <ol>
+            <li>打开Chrome浏览器</li>
+            <li>访问: https://obsidian.lazycat1012.heiyu.space/</li>
+            <li>点击Chrome工具栏中的OpenClaw扩展图标</li>
+            <li>确保扩展图标显示为"已连接"状态</li>
+        </ol>
+    </div>
+    
+    <div class="status">
+        <h2>🌐 网络状态</h2>
+        <p><strong>目标网站：</strong> 可以访问</p>
+        <p><strong>IP限制：</strong> 检测到限制 (错误: can't find login info for this ip)</p>
+        <p><strong>当前IP：</strong> 223.88.61.216</p>
+    </div>
+    
+    <h2>📋 下一步操作</h2>
+    <p>选择以下方案之一：</p>
+    <ul>
+        <li><strong>方案A：</strong> 使用无头浏览器进行自动化操作</li>
+        <li><strong>方案B：</strong> 手动连接Chrome扩展后重试</li>
+        <li><strong>方案C：</strong> 导出笔记内容进行处理</li>
+    </ul>
+    
+    <p>生成时间: 2026-02-04 16:21:36 UTC</p>
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>技能库总览</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1a2980 0%, #26d0ce 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px 15px 0 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1a2980;
+            margin-bottom: 5px;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .category {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .category h3 {
+            color: #1a2980;
+            border-bottom: 3px solid #26d0ce;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .skill-list li {
+            padding: 10px 15px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid #26d0ce;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .skill-name {
+            font-weight: 600;
+        }
+        
+        .skill-source {
+            font-size: 0.8rem;
+            color: #666;
+            background: #e9ecef;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+        
+        .source-huangwb8 { background: #e3f2fd; color: #1a2980; }
+        .source-bensz { background: #e8f5e8; color: #155724; }
+        .source-original { background: #fff3cd; color: #856404; }
+        
+        .usage-guide {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #1a2980;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 5px;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #26d0ce;
+            transform: translateY(-2px);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-tools"></i> AI技能库总览</h1>
+        <p>集成多个来源的Agent Skills标准技能</p>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card">
+            <div class="stat-number">21</div>
+            <div>总技能数</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">3</div>
+            <div>技能来源</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">6</div>
+            <div>技能分类</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">100%</div>
+            <div>标准兼容</div>
+        </div>
+    </div>
+    
+    <div class="categories">
+        <div class="category">
+            <h3><i class="fas fa-file-alt"></i> LaTeX科研写作</h3>
+            <ul class="skill-list">
+                <li><span class="skill-name">make_latex_model</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">nsfc-abstract</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">nsfc-bib-manager</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">nsfc-justification-writer</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">nsfc-research-content-writer</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">nsfc-research-foundation-writer</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">transfer_old_latex_to_new</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <h3><i class="fas fa-project-diagram"></i> 项目开发</h3>
+            <ul class="skill-list">
+                <li><span class="skill-name">init-project</span><span class="skill-source source-bensz">bensz</span></li>
+                <li><span class="skill-name">git-commit</span><span class="skill-source source-bensz">bensz</span></li>
+                <li><span class="skill-name">git-publish-release</span><span class="skill-source source-bensz">bensz</span></li>
+                <li><span class="skill-name">slidev</span><span class="skill-source source-original">原有</span></li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <h3><i class="fas fa-vial"></i> 测试验证</h3>
+            <ul class="skill-list">
+                <li><span class="skill-name">auto-test-skill</span><span class="skill-source source-bensz">bensz</span></li>
+                <li><span class="skill-name">auto-test-project</span><span class="skill-source source-bensz">bensz</span></li>
+                <li><span class="skill-name">check-review-alignment</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">systematic-literature-review</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <h3><i class="fas fa-book"></i> 文献与评审</h3>
+            <ul class="skill-list">
+                <li><span class="skill-name">get-review-theme</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">guide-updater</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+                <li><span class="skill-name">complete_example</span><span class="skill-source source-huangwb8">huangwb8</span></li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <h3><i class="fas fa-file-signature"></i> 文档工具</h3>
+            <ul class="skill-list">
+                <li><span class="skill-name">write-skill-readme</span><span class="skill-source source-bensz">bensz</span></li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <h3><i class="fas fa-download"></i> 系统工具</h3>
+            <ul class="skill-list">
+                <li><span class="skill-name">install-bensz-skills</span><span class="skill-source source-bensz">bensz</span></li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="usage-guide">
+        <h3><i class="fas fa-play-circle"></i> 使用指南</h3>
+        <p>所有技能都遵循<strong>Agent Skills开放标准</strong>，可以通过自然语言触发：</p>
+        
+        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin: 15px 0;">
+            <strong>示例：</strong>
+            <ul>
+                <li>"使用init-project技能初始化我的项目"</li>
+                <li>"用git-commit提交我的改动"</li>
+                <li>"运行auto-test-skill测试这个技能"</li>
+                <li>"使用make_latex_model优化我的LaTeX模板"</li>
+            </ul>
+        </div>
+        
+        <p><strong>技能位置：</strong>所有技能都在 <code>/home/node/clawd/skills/</code> 目录下</p>
+    </div>
+    
+    <div style="text-align: center; margin: 30px 0;">
+        <h3><i class="fas fa-rocket"></i> 快速开始</h3>
+        <a href="#" onclick="showSkillList()" class="btn"><i class="fas fa-list"></i> 查看所有技能</a>
+        <a href="#" onclick="showLaTeXSkills()" class="btn"><i class="fas fa-file-alt"></i> LaTeX技能</a>
+        <a href="#" onclick="showProjectSkills()" class="btn"><i class="fas fa-project-diagram"></i> 项目技能</a>
+    </div>
+    
+    <footer>
+        <p>© 2026 AI技能库 | 集成自：huangwb8/skills、huangwb8/ChineseResearchLaTeX、原有技能</p>
+        <p>所有技能遵循 Agent Skills 开放标准 (agentskills.io)</p>
+    </footer>
+    
+    <script>
+        function showSkillList() {
+            const skills = [
+                'make_latex_model - LaTeX模板优化器',
+                'nsfc-abstract - 基金摘要写作',
+                'nsfc-bib-manager - 参考文献管理',
+                'nsfc-justification-writer - 立项依据写作',
+                'nsfc-research-content-writer - 研究内容写作',
+                'nsfc-research-foundation-writer - 研究基础写作',
+                'transfer_old_latex_to_new - LaTeX迁移',
+                'init-project - 项目初始化',
+                'git-commit - Git提交助手',
+                'git-publish-release - GitHub发布',
+                'auto-test-skill - 技能测试',
+                'auto-test-project - 项目测试',
+                'check-review-alignment - 评审对齐检查',
+                'systematic-literature-review - 系统文献综述',
+                'get-review-theme - 评审主题获取',
+                'guide-updater - 指南更新',
+                'complete_example - 完整示例',
+                'slidev - 演示文稿创建',
+                'write-skill-readme - README编写',
+                'install-bensz-skills - 技能安装器'
+            ];
+            alert('所有技能列表：\n\n' + skills.join('\n'));
+        }
+        
+        function showLaTeXSkills() {
+            alert('LaTeX科研写作技能：\n\n1. make_latex_model - LaTeX模板高保真优化器\n2. nsfc-abstract - 国家自然科学基金摘要写作\n3. nsfc-bib-manager - 参考文献管理器\n4. nsfc-justification-writer - 立项依据写作助手\n5. nsfc-research-content-writer - 研究内容写作助手\n6. nsfc-research-foundation-writer - 研究基础写作助手\n7. transfer_old_latex_to_new - LaTeX模板迁移工具');
+        }
+        
+        function showProjectSkills() {
+            alert('项目开发技能：\n\n1. init-project - 自动生成项目文档\n2. git-commit - 智能Git提交\n3. git-publish-release - GitHub发布助手\n4. slidev - 创建Slidev演示文稿');
+        }
+    </script>
+</body>
+</html>
