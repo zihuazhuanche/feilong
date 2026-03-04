@@ -61,3 +61,8 @@ Skills are shared. Your setup is yours. Keeping them apart means you can update 
 - **GitHub Protection**: GitHub automatically detects and blocks secrets in pushes
 - **Environment Variables**: Sensitive data should be kept in .env files (excluded from git)
 - **Git Ignore**: Always maintain .gitignore to protect sensitive files
+
+### Website Deployment
+- **GitHub Pages**: https://www.feilong.eu.org
+- **Push to GitHub**: Content will be automatically displayed on the website
+- **Repository**: https://github.com/zihuazhuanche/feilong.git
