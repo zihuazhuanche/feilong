@@ -1,9 +1,22 @@
 [
   {
+    "id": "mmd7lrtkvlpzdgpa",
+    "title": "Obsidian的发展理念",
+    "url": "https://x.com/kepano/status/1694731713686196526",
+    "type": [
+      "article"
+    ],
+    "description": "<p>Obsidian的发展计划：永远保持10-12人团队，不接受风险投资，不收集个人数据和分析数据。继续以软件是短暂的、文件比应用更重要为前提进行开发。使用开放和持久的文件格式。</p>",
+    "image": "",
+    "created": "2026-03-05 T08:34:14.937Z"
+  },
+  {
     "id": "yqhc1s0yoceifqq",
     "title": "GitHub - withastro/astro: The web framework for content-driven websites. ⭐️ Star to support our work!",
     "url": "https://github.com/withastro/astro",
-    "type": ["link"],
+    "type": [
+      "link"
+    ],
     "description": "<p>The web framework for content-driven websites. ⭐️ Star to support our work! - withastro/astro</p>",
     "image": "https://opengraph.githubassets.com/9ed1bf8f6e3e7652761aeae44631a1105cf0306ac739f0bf080d47371264c142/withastro/astro",
     "created": "2026-02-26 05:26:38.000Z"
@@ -12,7 +25,9 @@
     "id": "rd1oo9zt0c5yz1i",
     "title": "Claude.md - 为 AI 助手定制行为规范的新范式",
     "url": "https://timkellogg.me/blog/2025/02/11/claude-md",
-    "type": ["article"],
+    "type": [
+      "article"
+    ],
     "description": "<p>Claude.md 是一种在代码库根目录放置 Markdown 文件来定制 AI 助手行为的新范式，通过项目级上下文让 AI 更懂你的代码风格和约定。</p>",
     "image": "",
     "created": "2026-02-26 05:07:45.000Z"
@@ -21,7 +36,9 @@
     "id": "bcb1634f",
     "title": "GitHub Actions 自动化部署指南",
     "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site",
-    "type": ["article"],
+    "type": [
+      "article"
+    ],
     "description": "<p>GitHub Actions 是一个强大的 CI/CD 平台，可以自动构建、测试和部署代码。对于静态网站（如 Astro 生成的博客），可以使用 GitHub Actions 实现自动化部署到 GitHub Pages。</p>\n<p>配置时需要注意几点：</p>\n<ol>\n<li>工作流文件必须位于 <code>.github/workflows/</code> 目录</li>\n<li>默认分支（通常是 main）的 push 会自动触发部署</li>\n<li>需要设置正确的权限（contents: read, pages: write, id-token: write）</li>\n</ol>\n<p>今天通过实际操作，我们发现了一个常见问题：推送时使用了错误的分支（master 而不是 main），导致工作流没有触发。切换到正确的分支后，部署立即成功。</p>",
     "image": "",
     "created": "2026-03-04 16:06:00.000Z"
