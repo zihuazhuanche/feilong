@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import base64
 import json
 import os
 import re
@@ -15,8 +16,8 @@ LINKS_JSON = REPO_ROOT / 'src' / 'data' / 'links.json'
 POSTS_DIR = REPO_ROOT / 'src' / 'content' / 'posts'
 
 
-def run(cmd, check=True):
-    return subprocess.run(cmd, cwd=REPO_ROOT, check=check, text=True)
+def run(cmd, check=True, env=None, capture_output=False):
+    return subprocess.run(cmd, cwd=REPO_ROOT, check=check, text=True, env=env, capture_output=capture_output)
 
 
 def fetch_meta(url: str) -> dict:
@@ -104,13 +105,18 @@ def git_has_changes() -> bool:
 
 
 def push_with_token(token: str) -> None:
-    original = subprocess.run(['git', 'remote', 'get-url', 'origin'], cwd=REPO_ROOT, capture_output=True, text=True, check=True).stdout.strip()
-    remote = f'https://x-access-token:{token}@github.com/zihuazhuanche/feilong.git'
-    try:
-        run(['git', 'remote', 'set-url', 'origin', remote])
-        run(['git', 'push', 'origin', 'main'])
-    finally:
-        run(['git', 'remote', 'set-url', 'origin', original], check=False)
+    remote = subprocess.run(['git', 'remote', 'get-url', 'origin'], cwd=REPO_ROOT, capture_output=True, text=True, check=True).stdout.strip()
+    if 'github.com' not in remote:
+        raise RuntimeError('origin is not a GitHub remote; refusing token push')
+
+    basic = base64.b64encode(f'x-access-token:{token}'.encode('utf-8')).decode('ascii')
+    env = os.environ.copy()
+    env.update({
+        'GIT_CONFIG_COUNT': '1',
+        'GIT_CONFIG_KEY_0': 'http.https://github.com/.extraheader',
+        'GIT_CONFIG_VALUE_0': f'AUTHORIZATION: basic {basic}',
+    })
+    run(['git', 'push', 'origin', 'main'], env=env)
 
 
 def main():
@@ -156,7 +162,7 @@ def main():
         print('build_ok=true')
 
     if args.commit and git_has_changes():
-        run(['git', 'add', 'src/data/links.json', 'src/content/posts', 'scripts/blog-pusher.py'])
+        run(['git', 'add', 'src/data/links.json', 'src/content/posts', 'scripts/blog-pusher.py', 'scripts/blog-pusher.sh'])
         run(['git', 'commit', '-m', f'content: publish {title[:40]}'])
         print('commit_ok=true')
     elif args.commit:
